@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://a-castellano.github.io/"/>
-  <updated>2016-08-23T11:11:39.862Z</updated>
+  <updated>2016-08-24T07:26:18.742Z</updated>
   <id>https://a-castellano.github.io/</id>
   
   <author>
@@ -16,29 +16,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://a-castellano.github.io/2016/08/23/hello-world/"/>
-    <id>https://a-castellano.github.io/2016/08/23/hello-world/</id>
-    <published>2016-08-23T11:11:39.862Z</published>
-    <updated>2016-08-23T11:11:39.862Z</updated>
+    <title>This is Major Tom to ground control</title>
+    <link href="https://a-castellano.github.io/2016/08/23/This-is-Major-Tom-to-ground-control/"/>
+    <id>https://a-castellano.github.io/2016/08/23/This-is-Major-Tom-to-ground-control/</id>
+    <published>2016-08-23T21:57:34.000Z</published>
+    <updated>2016-08-24T07:26:18.742Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>Engines Ready! It is Time to liftoff!</p>
+<p>Welcome to my blog. Here I will try to post interesting pieces of my own work such as sysadmin scripts, useful dev tools with examples, etc. I hope you will enjoy the lecture of my website while you learn new concepts.</p>
+<p>First of all. How is this blog made?</p>
+<p>I’m using <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> as blogging platfform. I found it few days ago and it seems really useful and easy to use. Following the <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> this blog was set in few minutes.</p>
+<p>The feature I like the most is that you can mantain the blog in your local system (in my case I’m using an Ubuntu 16.04 VM) for writting posts. When the post is ready to be published you only have to “build” the blog and “deploy” it to your site repo. Hexo will generate a static website in the previously choosen repository (it’s all in the <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a>).</p>
+<p>So, when I’ve finished this post, from my VM, I check that the post is OK rendering the blog in my brwoser.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>I can see the local version of my blog in <a href="http://MY_SERVER_IP:4000" target="_blank" rel="external">http://MY_SERVER_IP:4000</a> (by default it uses that port)</p>
+<p>If everithing looks fine to me it’s time to bloud the static content and deploy it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate &amp;&amp; hexo deploy</div></pre></td></tr></table></figure>
+<p>And that’s all! The new post it’s been published in my blog!</p>
+<p>The Hexo blog is stored in my <a href="https://github.com/a-castellano/hexo_blog" target="_blank" rel="external">GitHub acccount</a> and the static webpage that you are wathing is <a href="https://github.com/a-castellano/a-castellano.github.io" target="_blank" rel="external">there</a> too.</p>
+<p>I’m not explaining how to set up an hexo blog, the <a href="https://hexo.io/docs/" target="_blank" rel="external">Hexo documentation</a> is all you need for doing it.</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;Engines Ready! It is Time to liftoff!&lt;/p&gt;
+&lt;p&gt;Welcome to my blog. Here I will try to post interesting pieces of my own work such as sysadm
     
     </summary>
     
+      <category term="global" scheme="https://a-castellano.github.io/categories/global/"/>
+    
+    
+      <category term="hexo" scheme="https://a-castellano.github.io/tags/hexo/"/>
     
   </entry>
   
