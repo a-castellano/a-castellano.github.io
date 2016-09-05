@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://a-castellano.github.io/"/>
-  <updated>2016-09-05T07:01:25.476Z</updated>
+  <updated>2016-09-05T10:38:24.207Z</updated>
   <id>https://a-castellano.github.io/</id>
   
   <author>
@@ -20,15 +20,16 @@
     <link href="https://a-castellano.github.io/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/"/>
     <id>https://a-castellano.github.io/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/</id>
     <published>2016-09-05T06:59:09.000Z</published>
-    <updated>2016-09-05T07:01:25.476Z</updated>
+    <updated>2016-09-05T10:38:24.207Z</updated>
     
-    <content type="html"><![CDATA[<p>Let’s play with Docker and learn something about it!</p>
-<p>But wait, what the hell is Docker? <a href="https://www.docker.com" target="_blank" rel="external">Docker</a> is an open platform to build, ship and run distributed applications anywhere. So you can run apps which “live” inside a contaniner runned and mannaged by Docker. It is similar to VirtualBox but Docker is lighter cause it’s architectural approach.</p>
-<p>It’s very useful when you want to scale your app, the more load, the more containers containing the same app image you’ll deploy very quickly. It could be like Amazon Auto Scaling Group but you won’t deploy full machines.</p>
+    <content type="html"><![CDATA[<p><strong>In this post I talk about how to get started in Docker. First we will set a Docker server, afterwards we will create your first Docker image and we will run it.</strong> </p>
+<p>Let’s play with Docker and learn something about it!</p>
+<p>But wait, what is Docker? <a href="https://www.docker.com" target="_blank" rel="external">Docker</a> is an open platform to build, ship and run distributed applications anywhere. So you can run apps which “live” inside a contaniner runned and mannaged by Docker.</p>
+<p>It is very useful when you want to scale your app, the more load, the more containers containing the same app image you will deploy very quickly. It could be like Amazon Auto Scaling Group but you will not deploy full machines.</p>
 <p>The containers run images with your apps, in this post I will create 3 images (I will call them Archons). We will store the docker images into our <a href="https://hub.docker.com" target="_blank" rel="external">Docker Hub Repo</a>.</p>
 <p><strong>Installing Docker</strong></p>
 <p>Im going to create an 20$/month Ubuntu Droplet in my <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a> account and I will use <a href="https://www.ansible.com" target="_blank" rel="external">Ansible</a> to install Docker.</p>
-<div class="alert info"><p>I’m not going to explain what Ansible is and how to use it. In this post and the following ones I may use my own Ansible repo. I’ve promised to myself that I will write a wiki for that project ASAP.</p>
+<div class="alert info"><p>I am still working on improving the wiki of my own repo for Ansible. I will use it in the following post of this series once I have it ready.</p>
 </div>
 <p>So, let’s clone my <a href="https://www.digitalocean.com" target="_blank" rel="external">Sysadmin Scripts</a> repo and I will use my Docker Role to install all the necesary packages in my droplet.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/a-castellano/Sysadmin-Scripts.git</div><div class="line"><span class="built_in">cd</span> Sysadmin-Scripts/Ansible/</div></pre></td></tr></table></figure></p>
 <p>Place your droplet IP into <em>inventory/my.hosts</em>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[Docker]</div><div class="line">YOUR_DROPLET_IP</div></pre></td></tr></table></figure></p>
@@ -43,7 +44,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="_">-a</span></div><div class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</div><div class="line">584c54e123ec        debian              <span class="string">"/bin/bash"</span>         10 minutes ago      Up 6 seconds                            ArchonWeb</div></pre></td></tr></table></figure>
 <p>Ok, our first docker is alive, let’s enter into it.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t ArchonWeb  /bin/bash</div></pre></td></tr></table></figure>
-<p>Hell Yeah! We are inside our first Docker container running!</p>
+<p>Congratulations! We are inside our first Docker container running!</p>
 <p>As ArchonWeb will be a web server we are going to install Apache2.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get install apache2 apache2-utils php5 php5-mcrypt php5-mysql php5-cli php5-common php5-json php5-readline php-pear libmcrypt4 libapache2-mod-php5 libmcrypt-dev mcrypt mariadb-client net-tools -y</div><div class="line">service apache2 start</div></pre></td></tr></table></figure>
 <p>Apache2 is running!</p>
@@ -71,15 +72,13 @@
 <div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" title="Apache 2 Default Server" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" alt="Apache 2 Default Server"></a><span class="caption">Apache 2 Default Server</span></div><div style="clear:both;"></div>
 <p>You can configue the container to launch apache2 when you start the container.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i acastellano/archonweb /usr/sbin/apache2ctl -D FOREGROUND</div><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure>
-<p>It works! Wait….. what happends if we put private webpages in our container, our conted will be public if we commit our images. Where the hell are my database for my web apps?</p>
-<p>Keep calm, in the next adventure I will talk about volumes and Docker Composer (for automatize your dockers deployment.)</p>
-<p>See you in the next post.</p>
+<p>If you followed all the intructions until here you have ArchonWeb running. Congratulations!</p>
+<p>Probably you are having some questions and concerns such as “What happens if we put a private webpage in our container, will it be public if we commit our images? Where is the database for my webapps? No worries, this was a first example of how Docker works. In the following posts of this series I will address all these questions and more. For starters, in the next adventure I will talk about <strong>volumes</strong> and <strong>Docker Composer</strong> (for automatize your dockers deployment).</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Let’s play with Docker and learn something about it!&lt;/p&gt;
-&lt;p&gt;But wait, what the hell is Docker? &lt;a href=&quot;https://www.docker.com&quot; target=&quot;_
+      &lt;p&gt;&lt;strong&gt;In this post I talk about how to get started in Docker. First we will set a Docker server, afterwards we will create your first D
     
     </summary>
     
