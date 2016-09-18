@@ -25,7 +25,7 @@ Let’s play with Docker and learn somet">
 Let’s play with Docker and learn somet">
 <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/creating_repo.png">
 <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png">
-<meta property="og:updated_time" content="2016-09-05T14:14:02.111Z">
+<meta property="og:updated_time" content="2016-09-16T08:26:01.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="My marvelous adventures with Docker - Part I">
 <meta name="twitter:description" content="In this post I talk about how to get started in Docker. First we will set a Docker server, afterwards we will create your first Docker image and we will run it. 
@@ -322,7 +322,7 @@ Let’s play with Docker and learn somet">
 <p>Start the container, enter into it and start the Apache2 web server. Now go to your docker host with port 8080 and you’ll see the Apache default page.</p>
 <div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" title="Apache 2 Default Server" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" alt="Apache 2 Default Server"></a><span class="caption">Apache 2 Default Server</span></div><div style="clear:both;"></div>
 <p>You can configue the container to launch apache2 when you start the container.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i acastellano/archonweb /usr/sbin/apache2ctl -D FOREGROUND</div><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND</div><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure>
 <p>If you followed all the intructions until here you have ArchonWeb running. Congratulations!</p>
 <p>Probably you are having some questions and concerns such as “What happens if we put a private webpage in our container, will it be public if we commit our images? Where is the database for my webapps? No worries, this was a first example of how Docker works. In the following posts of this series I will address all these questions and more. For starters, in the next adventure I will talk about <strong>volumes</strong> and <strong>Docker Composer</strong> (for automatize your dockers deployment).</p>
 
@@ -343,7 +343,7 @@ Let’s play with Docker and learn somet">
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/"  data-tooltip="My marvelous adventures with Docker - Part II">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -414,7 +414,7 @@ Let’s play with Docker and learn somet">
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/"  data-tooltip="My marvelous adventures with Docker - Part II">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -582,6 +582,25 @@ Let’s play with Docker and learn somet">
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                            <h3 class="media-heading">My marvelous adventures with Docker - Part II</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    Sep 18, 2016
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -589,7 +608,7 @@ Let’s play with Docker and learn somet">
                 data-message-zero="no post found"
                 data-message-one="1 post found"
                 data-message-other="{n} posts found">
-                2 posts found
+                3 posts found
             </p>
         </div>
     </div>

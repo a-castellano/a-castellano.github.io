@@ -6,19 +6,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Álvaro Castellano">
-    <title>Archives - Álvaro Castellano</title>
+    <title>My marvelous adventures with Docker - Part II - Álvaro Castellano</title>
     <meta name="author" content="Álvaro Castellano Vela">
+    
+        <meta name="keywords" content="docker,docker-compose">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta property="og:type" content="blog">
-<meta property="og:title" content="Álvaro Castellano">
-<meta property="og:url" content="https://a-castellano.github.io/archives/index.html">
+    <meta name="description" content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish comu">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="My marvelous adventures with Docker - Part II">
+<meta property="og:url" content="https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/index.html">
 <meta property="og:site_name" content="Álvaro Castellano">
+<meta property="og:description" content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish comu">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/docker_image_tags01.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/archonwebv2_default_website.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/docker-my-site-io.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/something-for-now.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/archonwebv3_index_not_configured.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/archonwebv3_working.png">
+<meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/archonwebv3_two_tables.png">
+<meta property="og:updated_time" content="2016-09-18T18:11:27.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Álvaro Castellano">
+<meta name="twitter:title" content="My marvelous adventures with Docker - Part II">
+<meta name="twitter:description" content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish comu">
+<meta name="twitter:image" content="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/docker_image_tags01.png">
     
     
         
@@ -27,6 +41,9 @@
         <meta property="og:image" content="https://a-castellano.github.io/assets/images/avatar.jpg"/>
     
     
+    
+        <meta property="og:image" content="https://resize.rbl.ms/simage/https%3A%2F%2Fassets.rbl.ms%2F243810%2F397x306.jpg/1920,1000/rlAjK16vaMttAtWh/img.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://resize.rbl.ms/simage/https%3A%2F%2Fassets.rbl.ms%2F243810%2F397x306.jpg/1920,1000/rlAjK16vaMttAtWh/img.jpg" />
     
     
     <!--STYLES-->
@@ -58,7 +75,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Álvaro Castellano</a>
@@ -82,7 +99,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -217,26 +234,19 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-    <section class="postShorten-group main-content-wrap">
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
+        <div class="post-header-cover
+                    text-left
+                    "
+             style="background-image:url('https://resize.rbl.ms/simage/https%3A%2F%2Fassets.rbl.ms%2F243810%2F397x306.jpg/1920,1000/rlAjK16vaMttAtWh/img.jpg');"
+             data-behavior="4">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
-                            My marvelous adventures with Docker - Part II
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+                <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            My marvelous adventures with Docker - Part II
+        </h1>
+    
+    <div class="post-meta">
     <time itemprop="datePublished" datetime="2016-09-18T17:35:51+02:00">
 	
 		    Sep 18, 2016
@@ -251,10 +261,21 @@
     
 </div>
 
-            </div>
+</div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><strong>In this post I continue my adventures with Docker. After creating our first image and container in the previous <a href="https://a-castellano.github.io/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/">post</a> I will look into how docker images can autostart services and how to establish comunication between containers.</strong></p>
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><strong>In this post I continue my adventures with Docker. After creating our first image and container in the previous <a href="https://a-castellano.github.io/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/">post</a> I will look into how docker images can autostart services and how to establish comunication between containers.</strong></p>
 <div class="alert info"><p>During this post we are creating images and storing them in Docker Hub. All my images are stored in my <a href="https://hub.docker.com/r/acastellano/archonweb/" target="_blank" rel="external">ArchonWeb</a> repository. All the scripts used in this post an be found in my <a href="https://github.com/a-castellano/docker" target="_blank" rel="external">Docker repo</a>.</p>
 </div>
 <p>First of all we should remove all containers and images to mantian our workspace clean.</p>
@@ -372,190 +393,77 @@
 <p>This is it so far folks!</p>
 <p>I’m learning new things about Docker and I will write about it soon. Stay tunned.</p>
 
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/">
-                            My marvelous adventures with Docker - Part I
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-05T08:59:09+02:00">
-	
-		    Sep 05, 2016
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/global/">global</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/docker/">docker</a>
 
             </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><strong>In this post I talk about how to get started in Docker. First we will set a Docker server, afterwards we will create your first Docker image and we will run it.</strong> </p>
-<p>Let’s play with Docker and learn something about it!</p>
-<p>But wait, what is Docker? <a href="https://www.docker.com" target="_blank" rel="external">Docker</a> is an open platform to build, ship and run distributed applications anywhere. So you can run apps which “live” inside a contaniner runned and mannaged by Docker.</p>
-<p>It is very useful when you want to scale your app, the more load, the more containers containing the same app image you will deploy very quickly. It could be like Amazon Auto Scaling Group but you will not deploy full machines.</p>
-<p>The containers run images with your apps, in this post I will create 3 images (I will call them Archons). We will store the docker images into our <a href="https://hub.docker.com" target="_blank" rel="external">Docker Hub Repo</a>.</p>
-<p><strong>Installing Docker</strong></p>
-<p>Im going to create an 20$/month Ubuntu Droplet in my <a href="https://www.digitalocean.com" target="_blank" rel="external">Digital Ocean</a> account and I will use <a href="https://www.ansible.com" target="_blank" rel="external">Ansible</a> to install Docker.</p>
-<div class="alert info"><p>I am still working on improving the wiki of my own repo for Ansible. I will use it in the following post of this series once I have it ready.</p>
-</div>
-<p>So, let’s clone my <a href="https://github.com/a-castellano/Sysadmin-Scripts.git" target="_blank" rel="external">Sysadmin Scripts</a> repo and I will use my Docker Role to install all the necesary packages in my droplet.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/a-castellano/Sysadmin-Scripts.git</div><div class="line"><span class="built_in">cd</span> Sysadmin-Scripts/Ansible/</div></pre></td></tr></table></figure></p>
-<p>Place your droplet IP into <em>inventory/my.hosts</em>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[Docker]</div><div class="line">YOUR_DROPLET_IP</div></pre></td></tr></table></figure></p>
-<p>If your is Ubuntu bersion is 16.04 you’ll have to install python.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@YOUR_DROPLET_IP apt-get install -y python</div></pre></td></tr></table></figure></p>
-<p>Launch the playbook and reboot your droplet after the deployment.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible-playbook playbooks/setup_docker/setup.yml</div></pre></td></tr></table></figure></p>
-<p><strong>Deploying dockers</strong></p>
-<p>We will start creating our first Archon which will contain an Apache web server. We will create a container from the <a href="https://hub.docker.com/_/debian" target="_blank" rel="external">official Debian Docker image</a>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker create  --name ArchonWeb --hostname ArchonWeb -i debian</div><div class="line">Unable to find image <span class="string">'debian:latest'</span> locally</div><div class="line">latest: Pulling from library/debian</div><div class="line"></div><div class="line">8ad8b3f87b37: Pull complete</div><div class="line">Digest: sha256:2340a704d1f8f9ecb51c24d9cbce9f5ecd301b6b8ea1ca5eaba9edee46a2436d</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> debian:latest</div><div class="line">584c54e123ec442b9c17a1645a9057406c67d8c80f72903a377f904ce9ae7269</div></pre></td></tr></table></figure>
-<p>Docker checks if there exists an image called “debian” in <a href="https://hub.docker.com" target="_blank" rel="external">Docker Hub</a>. If Docker doesn’t have the latest version it will donwload it. When Docker gets the image it will create the container with debian inside.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="_">-a</span></div><div class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</div><div class="line">584c54e123ec        debian              <span class="string">"/bin/bash"</span>         2 minutes ago       Created                                 ArchonWeb</div></pre></td></tr></table></figure>
-<p>Start the docker<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="_">-a</span></div><div class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</div><div class="line">584c54e123ec        debian              <span class="string">"/bin/bash"</span>         10 minutes ago      Up 6 seconds                            ArchonWeb</div></pre></td></tr></table></figure>
-<p>Ok, our first docker is alive, let’s enter into it.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t ArchonWeb  /bin/bash</div></pre></td></tr></table></figure>
-<p>Congratulations! We are inside our first Docker container running!</p>
-<p>As ArchonWeb will be a web server we are going to install Apache2.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get install apache2 apache2-utils php5 php5-mcrypt php5-mysql php5-cli php5-common php5-json php5-readline php-pear libmcrypt4 libapache2-mod-php5 libmcrypt-dev mcrypt mariadb-client net-tools -y</div><div class="line">service apache2 start</div></pre></td></tr></table></figure>
-<p>Apache2 is running!</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">netstat -punta | grep LISTEN</div><div class="line">tcp6       0      0 :::80                   :::*                    LISTEN      3488/apache2</div></pre></td></tr></table></figure>
-<p>Wait, Apache2 is listening on a private address so we can’t connect to this server. Don’t start to cry yet, we can solve this issue.</p>
-<p>We are making changes in our machine thereforce our first step will be create a new image from “debian” one.</p>
-<p>Let’s exit from our docker.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">exit</span></div></pre></td></tr></table></figure>
-<p>Stop the Docker</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker stop ArchonWeb</div></pre></td></tr></table></figure>
-<p>Commit a new image called ArchonWeb from the original debian one.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m <span class="string">"Creating my first image"</span> ArchonWeb</div></pre></td></tr></table></figure>
-<p>Now, we have two images in our machine.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">&lt;none&gt;              &lt;none&gt;              YOUR_IMAGE_ID       57 seconds ago      262.4 MB</div><div class="line">debian              latest              031143c1c662        3 days ago          125.1 MB</div></pre></td></tr></table></figure>
-<p>Ok, this is not beauty and it would be better to have our new image in a repository. Create and account in <a href="https://hub.docker.com" target="_blank" rel="external">Docker Repo</a> and create a new repo too.</p>
-<div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/creating_repo.png" title="Creating the repo" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/creating_repo.png" alt="Creating the repo"></a><span class="caption">Creating the repo</span></div><div style="clear:both;"></div>
-<p>Log to your Docker Hub account.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker login</div><div class="line">Login with your Docker ID to push and pull images from Docker Hub. If you don<span class="string">'t have a Docker ID, head over to https://hub.docker.com to create one.</span></div><div class="line">Username: YOUR_USERNAME</div><div class="line">Password: YOUR_PASSWORD</div><div class="line">Login Succeeded</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m <span class="string">"Creating my first image"</span> ArchonWeb YOUR_USERNAME/archonweb</div></pre></td></tr></table></figure>
-<p>To probe that all is ok let’s delete our container and all the images</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">root@Docker:~|⇒  docker rm ArchonWeb</div><div class="line">ArchonWeb</div><div class="line">root@Docker:~|⇒  docker images</div><div class="line">REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">YOUR_USERNAME/archonweb   latest              c739c75c3b8e        33 minutes ago      262.4 MB</div><div class="line">&lt;none&gt;                  &lt;none&gt;              ad6d1440ebde        40 minutes ago      262.4 MB</div><div class="line">debian                  latest              031143c1c662        3 days ago          125.1 MB</div><div class="line">root@Docker:~|⇒  docker rmi c739c75c3b8e ad6d1440ebde 031143c1c662</div><div class="line">Untagged: YOUR_USERNAME/archonweb:latest</div><div class="line">Untagged: YOUR_USERNAME/archonweb@sha256:8e1e908fe823ef1b746718ebb7564548f4f0ea076faaae733f667fb5946acee7</div><div class="line">Deleted: sha256:c739c75c3b8e690427a845ae79206b1e3037fddf604765dc5e0478536161e5bb</div><div class="line">Deleted: sha256:ad6d1440ebde55617462269619<span class="built_in">cd</span>457bfa825d8f307c126d7fbc0ca3201c493f</div><div class="line">Deleted: sha256:a6a314f5c1a5da3d06226fe40216731384d3f80fafade48a2b1cef3f07384b96</div><div class="line">Untagged: debian:latest</div><div class="line">Untagged: debian@sha256:2340a704d1f8f9ecb51c24d9cbce9f5ecd301b6b8ea1ca5eaba9edee46a2436d</div><div class="line">Deleted: sha256:031143c1c662878cf5be0099ff759dd219f907a22113eb60241251d29344bb96</div><div class="line">Deleted: sha256:9e63c5bce4585dd7038d830a1f1f4e44cb1a1515b00e620ac718e934b484c938</div></pre></td></tr></table></figure>
-<p>Now we are going to create a new container with our own image and we will redirect the host port 8080 to our docker 80 port.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker create  --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb</div><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure>
-<p>Start the container, enter into it and start the Apache2 web server. Now go to your docker host with port 8080 and you’ll see the Apache default page.</p>
-<div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" title="Apache 2 Default Server" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/apache2_default_page.png" alt="Apache 2 Default Server"></a><span class="caption">Apache 2 Default Server</span></div><div style="clear:both;"></div>
-<p>You can configue the container to launch apache2 when you start the container.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND</div><div class="line">docker start ArchonWeb</div></pre></td></tr></table></figure>
-<p>If you followed all the intructions until here you have ArchonWeb running. Congratulations!</p>
-<p>Probably you are having some questions and concerns such as “What happens if we put a private webpage in our container, will it be public if we commit our images? Where is the database for my webapps? No worries, this was a first example of how Docker works. In the following posts of this series I will address all these questions and more. For starters, in the next adventure I will talk about <strong>volumes</strong> and <strong>Docker Composer</strong> (for automatize your dockers deployment).</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/" data-tooltip="My marvelous adventures with Docker - Part I">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/08/23/This-is-Major-Tom-to-ground-control/">
-                            This is Major Tom to ground control
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-08-23T23:57:34+02:00">
-	
-		    Aug 23, 2016
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/global/">global</a>
-
-
-    
-</div>
-
-            </div>
+                <a class="post-action-btn btn btn--default" href="#">
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>Engines Ready! It is Time to liftoff!</p>
-<p>Welcome to my blog. Here I will try to post interesting pieces of my own work such as sysadmin scripts, useful dev tools with examples, etc. I hope you will enjoy the lecture of my website while you learn new concepts.</p>
-<p>First of all. How is this blog made?</p>
-<p>I’m using <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> as blogging platfform. I found it few days ago and it seems really useful and easy to use. Following the <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> this blog was set in few minutes.</p>
-<p>The feature I like the most is that you can mantain the blog in your local system (in my case I’m using an Ubuntu 16.04 VM) for writting posts. When the post is ready to be published you only have to “build” the blog and “deploy” it to your site repo. Hexo will generate a static website in the previously choosen repository (it’s all in the <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a>).</p>
-<p>So, when I’ve finished this post, from my VM, I check that the post is OK rendering the blog in my brwoser.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>I can see the local version of my blog in <a href="http://MY_SERVER_IP:4000" target="_blank" rel="external">http://MY_SERVER_IP:4000</a> (by default it uses that port)</p>
-<p>If everithing looks fine to me it’s time to build the static content and deploy it.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate &amp;&amp; hexo deploy</div></pre></td></tr></table></figure>
-<p>And that’s all! The new post it’s been published in my blog!</p>
-<p>The Hexo blog is stored in my <a href="https://github.com/a-castellano/hexo_blog" target="_blank" rel="external">GitHub acccount</a> and the static webpage that you are watching is <a href="https://github.com/a-castellano/a-castellano.github.io" target="_blank" rel="external">there</a> too.</p>
-<p>I’m not explaining how to set up an hexo blog, the <a href="https://hexo.io/docs/" target="_blank" rel="external">Hexo documentation</a> is all you need for doing it.</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/08/23/This-is-Major-Tom-to-ground-control/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">page 1 of 1</li>
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+            
+        
+    </div>
+</article>
 
 
 
@@ -566,6 +474,84 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/" data-tooltip="My marvelous adventures with Docker - Part I">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -699,6 +685,8 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
 
