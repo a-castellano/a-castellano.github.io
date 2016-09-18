@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://a-castellano.github.io/"/>
-  <updated>2016-09-18T18:56:35.739Z</updated>
+  <updated>2016-09-18T18:57:43.429Z</updated>
   <id>https://a-castellano.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/"/>
     <id>https://a-castellano.github.io/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/</id>
     <published>2016-09-18T15:35:51.000Z</published>
-    <updated>2016-09-18T18:56:35.739Z</updated>
+    <updated>2016-09-18T18:57:43.429Z</updated>
     
     <content type="html"><![CDATA[<p><strong>In this post I continue my adventures with Docker. After creating our first image and container in the previous <a href="https://a-castellano.github.io/2016/09/05/My-marvelous-adventures-with-Docker-Part-I/">post</a> I will look into how docker images can autostart services and how to establish comunication between containers.</strong></p>
 <div class="alert info"><p>During this post we are creating images and storing them in Docker Hub. All my images are stored in my <a href="https://hub.docker.com/r/acastellano/archonweb/" target="_blank" rel="external">ArchonWeb</a> repository. All the scripts used in this post an be found in my <a href="https://github.com/a-castellano/docker" target="_blank" rel="external">Docker repo</a>.</p>
@@ -42,7 +42,7 @@
 <p>We need to update our image configuration, to do that we will create a new container with our desired settings. After doing this we will create a new image.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND</div></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker ps <span class="_">-l</span></div><div class="line">CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES</div><div class="line">ea13cfe69acf        YOUR_USERNAME/archonweb <span class="string">"/usr/sbin/apache2ctl"</span>   50 seconds ago      Created                                 ArchonWeb</div></pre></td></tr></table></figure>
-<p>There are no ports listed because the container is not launched.</p>
+<p>There are no ports listed because the container is not in execution.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m <span class="string">"Added COMMAND"</span> <span class="_">-a</span> <span class="string">"YOUR NAME"</span> ArchonWeb YOUR_USERNAME/archonweb:v2</div></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker images</div><div class="line">REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">YOUR_USERNAME/archonweb  v2                  a8870e0efa0a        44 seconds ago      262.4 MB</div><div class="line">YOUR_USERNAME/archonweb  latest              c739c75c3b8e        2 days ago          262.4 MB</div></pre></td></tr></table></figure>
 <p>If you are not signed in our <a href="https://hub.docker.com" target="_blank" rel="external">Docker Hub</a> account the following step will fail.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker push YOUR_USERNAME/archonweb:v2</div></pre></td></tr></table></figure></p>
