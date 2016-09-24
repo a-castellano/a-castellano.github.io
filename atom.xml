@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://a-castellano.github.io/"/>
-  <updated>2016-09-24T17:47:16.860Z</updated>
+  <updated>2016-09-24T17:49:05.376Z</updated>
   <id>https://a-castellano.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://a-castellano.github.io/2016/09/22/Restrict-Linux-users-to-certain-workspaces-only/"/>
     <id>https://a-castellano.github.io/2016/09/22/Restrict-Linux-users-to-certain-workspaces-only/</id>
     <published>2016-09-22T18:34:58.000Z</published>
-    <updated>2016-09-24T17:47:16.860Z</updated>
+    <updated>2016-09-24T17:49:05.376Z</updated>
     
     <content type="html"><![CDATA[<p>In this post I will talk about managing restricted access for certain users inside Linux environments. We will set a workspace were our guest users will be able to work in their amazing project. These users won’t have access outside of their shared workspace. Finally we will use <strong>Linux acl’s</strong> for managing user permissions inside in our secured directory.</p>
 <div class="alert success no-icon"><p>This post resolves a real issue that I had few days ago. I was asked for configuring a restricted access to one server. In that moment I had no idea about resolving this issue using a smart solution.</p>
