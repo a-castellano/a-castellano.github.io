@@ -231,6 +231,113 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/09/22/Restrict-Linux-users-to-certain-workspaces-only/">
+                            Restrict Linux users to certain workspaces
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-22T20:34:58+02:00">
+	
+		    Sep 22, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/global/">global</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>In this post I will talk about managing workspace access for certain users in Linux environments.<br>We will set a workspace where some guests will be able to work in their amazing project.<br>These users won’t have access to the files outside of their shared workspace.<br>Finally we will use <strong>Linux ACL</strong> to manage user permissions inside their workspace.</p>
+<div class="alert success no-icon"><p>This post resolves a real issue that I had few days ago.<br>I was asked to restrict access to a couple users in a server.<br>At the time I had no idea how to solve this issue in a smart way.</p>
+</div>
+<h2 id="Problem-overview"><a href="#Problem-overview" class="headerlink" title="Problem overview"></a>Problem overview</h2><p>I need to allow a new user who is developing a new website into our development environment machine.</p>
+<p>Doing this is very easy, we only need to create a user in our server… but here comes the problem, this user would be able to see other users’ home folders, config folders, etc.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ssh developerguest1@IP_ADDRES_OF_OUR_TEST_MACHINE</div><div class="line">$ <span class="built_in">cd</span> /home/john/</div><div class="line">$ ls</div><div class="line">john_files</div><div class="line">$ rsync <span class="_">-a</span>P john_files SOMEWHERE</div><div class="line">$ <span class="built_in">cd</span> /etc/apache2/sites-enabled/</div></pre></td></tr></table></figure>
+<div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/restrict-users-non-restrict.png" title="developerguest1 is able to read the server configurations" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/restrict-users-non-restrict.png" alt="developerguest1 is able to read the server configurations"></a><span class="caption">developerguest1 is able to read the server configurations</span></div><div style="clear:both;"></div>
+<p>I don’t trust neither <em>developerguest1</em> nor his brother in arms <em>developerguest2</em>.<br>I want to isolate their workspace from my entire server.<br>Both developers will be able to work in their work directories but they won’t be able to know what is outside those directories.<br>In this real case both developers will share their workspace but some folders will be owned only by one of them.</p>
+<p>Let’s do it!</p>
+<h2 id="Setting-up-our-workspace"><a href="#Setting-up-our-workspace" class="headerlink" title="Setting up our workspace"></a>Setting up our workspace</h2><p>In this post we will use <strong>Vagrant</strong> to deploy our test server, it allows us to deploy development environments in minutes.<br>We can deploy our environments to multiple providers such as <strong>VirtualBox</strong>, <strong>VMware Fusion</strong> or <strong>AWS</strong>.<br>See the <a href="https://www.vagrantup.com/docs/" target="_blank" rel="external">Official documentation</a> for more info.<br>In my case, I use Vagrant to make quick tests with Virtual Machines before deploying my configurations into production environments.<br>Of course, you can use any other type of virtual machine or physical machines, as you wish.</p>
+<p>Let’s start cloning my <a href="https://github.com/a-castellano/Sysadmin-Scripts" target="_blank" rel="external">Sysadmin Scripts</a> repo which contains the <strong>Vagrantfile</strong> that we will use.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/a-castellano/Sysadmin-Scripts.git</div><div class="line"><span class="built_in">cd</span> Sysadmin-Scripts/Vagrant/Ubuntu_14</div><div class="line">cp bootstrap.sh.example bootstrap.sh</div><div class="line">vim bootstrap.sh</div></pre></td></tr></table></figure></p>
+<p>Add your ssh public key in your local copy.</p>
+<script src="https://gist.github.com/a-castellano/c12e58fc4b881eb78e3681ace62d7937.js"></script>
+
+<p>Let’s awaken our machine.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">⇒  vagrant up</div><div class="line">Bringing machine <span class="string">'ubuntu1'</span> up with <span class="string">'virtualbox'</span> provider...</div><div class="line">==&gt; ubuntu1: Importing base box <span class="string">'ubuntu/trusty64'</span>...</div><div class="line">==&gt; ubuntu1: Matching MAC address <span class="keyword">for</span> NAT networking...</div><div class="line">==&gt; ubuntu1: Checking <span class="keyword">if</span> box <span class="string">'ubuntu/trusty64'</span> is up to date...</div><div class="line">==&gt; ubuntu1: Setting the name of the VM: Ubuntu_14_ubuntu1_1474577586167_25708</div><div class="line">==&gt; ubuntu1: Clearing any previously <span class="built_in">set</span> forwarded ports...</div><div class="line">==&gt; ubuntu1: Clearing any previously <span class="built_in">set</span> network interfaces...</div><div class="line">==&gt; ubuntu1: Available bridged network interfaces:</div><div class="line">1) en3: Ethernet Thunderbolt</div><div class="line">2) en0: Wi-Fi (AirPort)</div><div class="line">3) en1: Thunderbolt 1</div><div class="line">4) en2: Thunderbolt 2</div><div class="line">5) bridge0</div><div class="line">6) bridge100</div><div class="line">==&gt; ubuntu1: When choosing an interface, it is usually the one that is</div><div class="line">==&gt; ubuntu1: being used to connect to the internet.</div><div class="line">    ubuntu1: Which interface should the network bridge to? 1</div></pre></td></tr></table></figure></p>
+<p>When Vagrant ends it will show us our new machine IP address, let’s write it in our inventory file.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Sysadmin-Scripts/Ansible</div><div class="line">vim inventory/my.hosts</div></pre></td></tr></table></figure></p>
+<p>Place your Vagrant IP address in your inventory file.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">test</span>Mine]</div><div class="line">192.168.*.*</div></pre></td></tr></table></figure></p>
+<p>Now, let’s create the playbook to setup our environment.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir playbooks/setup_test</div><div class="line">vim mkdir playbooks/setup_test/setup.yml</div></pre></td></tr></table></figure></p>
+<script src="https://gist.github.com/a-castellano/7325a4788ba9c5fb9ac1c47aaa2c1be8.js"></script>
+
+<p>Our playbook needs another file containing the config of our test machine.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim vars/target_hosts/<span class="built_in">test</span>Mine.yml</div></pre></td></tr></table></figure></p>
+<script src="https://gist.github.com/a-castellano/5660fffad016a163e05466a4d25964fe.js"></script>
+
+<p>So, Ansible will create four users: two common users called John and Cassandra and two developers which won’t be able to log into our server using ssh.<br>The password for all users is “password”.</p>
+<p>Let’s configure our server:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ansible-playbook playbooks/setup_test_mine/setup.yml</div></pre></td></tr></table></figure></p>
+<p>After deploying our configurations let’s enter inside our vagrant machine.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> Sysadmin-Scripts/Vagrant/Ubuntu_14</div><div class="line">vagrant ssh</div></pre></td></tr></table></figure></p>
+<p>We will start copying our testing websites in our test machine.<br>The script <strong>configure.sh</strong> also changes the apache2 conf allowing access on <strong>/var/developers</strong>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo su</div><div class="line"><span class="built_in">cd</span></div><div class="line">git <span class="built_in">clone</span> https://github.com/a-castellano/acl-post-websites.git</div><div class="line"><span class="built_in">cd</span> acl-post-websites</div><div class="line">./configure.sh</div><div class="line">ls /var/developers</div><div class="line">developerguest1_website  developerguest2_website  developers_website</div></pre></td></tr></table></figure></p>
+<p>Now we are going to jail the <em>developers</em> users inside <strong>/var/www/developers</strong>.<br>In order to do this we have to modify our ssh server config, edit <strong>/etc/ssh/sshd_config</strong>, modify this file as follows:</p>
+<script src="https://gist.github.com/a-castellano/391d3cc23fe794b40d2416321f2abb37.js"></script>
+
+<p>Restart the ssh server.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service ssh restart</div></pre></td></tr></table></figure></p>
+<p>And change the jailed folder ownership and permissions.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chown root:root /var/developers</div><div class="line">chmod go-w /var/developers</div></pre></td></tr></table></figure></p>
+<p>In <strong>/etc/apache2/apache2.conf</strong> we need to add the <strong>/var/developers</strong> folder for giving apache2 access to this folder.</p>
+<h2 id="Testing-the-jail"><a href="#Testing-the-jail" class="headerlink" title="Testing the jail"></a>Testing the jail</h2><div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/restrict-users-restricted.png" title="developerguest1 is jailed inside /var/developers" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/restrict-users-restricted.png" alt="developerguest1 is jailed inside /var/developers"></a><span class="caption">developerguest1 is jailed inside /var/developers</span></div><div style="clear:both;"></div>
+<p>We did it!<br><strong>developerguest1</strong> and <strong>developerguest2</strong> are jailed inside <strong>/var/developers</strong> and they can’t go outside this folder.<br>The problem is solved.</p>
+<h2 id="Going-beyond-using-ACL"><a href="#Going-beyond-using-ACL" class="headerlink" title="Going beyond, using ACL"></a>Going beyond, using ACL</h2><p>Finally let’s suppose that now we want to block <strong>developerguest1</strong> from accessing <strong>developerguest2_website</strong> folder.<br>Of course we could create a jailed folder for each user to resolve this issue but in this case we are going tu use <strong>Linux ACL</strong>.</p>
+<p>Access Control List (ACL) provides an additional, more flexible permission mechanism for file systems.<br>It is designed to assist with UNIX file permissions.<br>ACL allows you to give permissions for any user or group to any disk resource.</p>
+<p>So, what are we going to do?</p>
+<p>We will change the ownership of <strong>/var/developers</strong> sub folders to <strong>www-data</strong>, the permission will be 770 therefore our developers won’t be able to look into their own folders.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/developers</div><div class="line">chown -R www-data. developerguest1_website  developerguest2_website  developers_website</div><div class="line">chmod -R 770 developerguest1_website  developerguest2_website  developers_website</div></pre></td></tr></table></figure>
+<p>After doing this the developers can’t access to their own directories.<br><div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/acl-developer-has-no-permissions.png" title="Developers have no access" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/acl-developer-has-no-permissions.png" alt="Developers have no access"></a><span class="caption">Developers have no access</span></div><div style="clear:both;"></div></p>
+<p>Using ACL we are going to give developerguest1 permissions to work inside developerguest1_website and developers_website folders.<br>We will do the same for developerguest2.</p>
+<p><strong>Enabling ACL</strong></p>
+<p>By default, ACL is enabled in Ubuntu14 but we need to enable it in our disk partition.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/fstab</div></pre></td></tr></table></figure>
+<p>We need to modify our disk partition settings from this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LABEL=cloudimg-rootfs   /        ext4   defaults        0 0</div></pre></td></tr></table></figure></p>
+<p>To this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LABEL=cloudimg-rootfs   /        ext4   defaults,acl    0 0</div></pre></td></tr></table></figure></p>
+<p>We must <strong>reboot</strong> our vagrant machine.</p>
+<p>Let’s review which commands we are going to use:<br><strong>getfacl</strong>: to review permissions.<br><strong>setfacl</strong>: the acl version of chmod.</p>
+<p>Let’s go <strong>/var/developers</strong> and give <strong>developerguest1</strong> rights to /var/developers/developerguest1_website<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/developers</div><div class="line">getfacl /var/developers/developerguest1_website</div><div class="line"></div><div class="line"><span class="comment"># file: /var/developers/developerguest1_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">group::rwx</div><div class="line">other::---</div></pre></td></tr></table></figure></p>
+<p>By default, the folder is owned by www-data as we set before.<br>Using ACL’s we are going to configure a new file creation behaviour, for each new file created by our developers, it will have read and execution permission by default.<br>We do this because if devloperguest1 creates a file, www-data won’t be able to read it.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">setfacl -R <span class="_">-d</span> -m  g::rwx /var/developers/developerguest1_website</div><div class="line">setfacl -R <span class="_">-d</span> -m  o::rx /var/developers/developerguest1_website</div><div class="line">getfacl /var/developers/developerguest1_website</div><div class="line"></div><div class="line"><span class="comment"># file: /var/developers/developerguest1_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">group::rwx</div><div class="line">other::---</div><div class="line">default:user::rwx</div><div class="line">default:group::rwx</div><div class="line">default:other::r-x</div></pre></td></tr></table></figure></p>
+<p>Wait, what are these <strong>setfacl</strong> options? Let’s see them:<br><strong>-R</strong>: recurse into subdirectories<br><strong>-d</strong>: operations apply to the default ACL<br><strong>-m</strong>: modify the current ACL(s) of file(s)</p>
+<p>Let’s give <strong>developerguest1</strong> permissions in his folder.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">setfacl -Rm u:developerguest1:rwx /var/developers/developerguest1_website</div><div class="line">getfacl /var/developers/developerguest1_website</div><div class="line"></div><div class="line"><span class="comment"># file: /var/developers/developerguest1_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">user:developerguest1:rwx</div><div class="line">group::rwx</div><div class="line">mask::rwx</div><div class="line">other::---</div><div class="line">default:user::rwx</div><div class="line">default:group::rwx</div><div class="line">default:other::r-x</div></pre></td></tr></table></figure></p>
+<p>Now <strong>developerguest1</strong> is able to access to access to <strong>developerguest1_website</strong> and modify it.<br><div class="figure center" style="width:;"><a class="fancybox" href="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/acl-developerguest1-has-access.png" title="Now, developerguest1 has access" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://s3-eu-west-1.amazonaws.com/a-castellano.github.io/acl-developerguest1-has-access.png" alt="Now, developerguest1 has access"></a><span class="caption">Now, developerguest1 has access</span></div><div style="clear:both;"></div></p>
+<p>So, <strong>developerguest1</strong> can change and create files that <strong>www-data</strong> can read, make some tests.</p>
+<p>Let’s do the same with <strong>developerguest2</strong>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">setfacl -R <span class="_">-d</span> -m  g::rwx /var/developers/developerguest2_website</div><div class="line">setfacl -R <span class="_">-d</span> -m  o::rx /var/developers/developerguest2_website</div><div class="line">setfacl -Rm u:developerguest2:rwx /var/developers/developerguest2_website</div><div class="line">getfacl /var/developers/developerguest2_website</div><div class="line"></div><div class="line"><span class="comment"># file: /var/developers/developerguest2_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">user:developerguest2:rwx</div><div class="line">group::rwx</div><div class="line">mask::rwx</div><div class="line">other::---</div><div class="line">default:user::rwx</div><div class="line">default:group::rwx</div><div class="line">default:other::r-x</div></pre></td></tr></table></figure></p>
+<p>Finally, we can assign access to developers group on <strong>developers_website</strong>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">setfacl -R <span class="_">-d</span> -m  g::rwx /var/developers/developers_website</div><div class="line">setfacl -R <span class="_">-d</span> -m  o::rwx /var/developers/developers_website</div><div class="line">setfacl -Rm u:developerguest1:rwx /var/developers/developers_website</div><div class="line">setfacl -Rm u:developerguest2:rwx /var/developers/developers_website</div><div class="line">getfacl /var/developers/developers_website</div><div class="line"></div><div class="line"><span class="comment"># file: /var/developers/developers_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">user:developerguest1:rwx</div><div class="line">user:developerguest2:rwx</div><div class="line">group::rwx</div><div class="line">mask::rwx</div><div class="line">other::---</div><div class="line">default:user::rwx</div><div class="line">default:group::rwx</div><div class="line">default:other::rwx</div></pre></td></tr></table></figure></p>
+<p>So for any guest developer we create we will need to modify the ACL, isn’t?<br>Well, it is not necessary, we can use ACL’s with groups too.</p>
+<p>First, let’s delete the current rules over <strong>developers_website</strong>.<br>We are going to use <strong>-b</strong> option to delete all ACL rules.<br>There are many other options that we can use, see <a href="https://linux.die.net/man/1/setfacl" target="_blank" rel="external">setfacl man page</a>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">setfacl -b /var/developers/developers_website</div><div class="line">setfacl -R <span class="_">-d</span> -m  g::rwx /var/developers/developers_website</div><div class="line">setfacl -R <span class="_">-d</span> -m  o::rwx /var/developers/developers_website</div><div class="line">setfacl -Rm g:developers:rwx /var/developers/developers_website</div><div class="line">getfacl /var/developers/developers_website</div><div class="line"></div><div class="line"><span class="comment"># file: var/developers/developers_website</span></div><div class="line"><span class="comment"># owner: www-data</span></div><div class="line"><span class="comment"># group: www-data</span></div><div class="line">user::rwx</div><div class="line">group::rwx</div><div class="line">group:developers:rwx</div><div class="line">mask::rwx</div><div class="line">other::---</div><div class="line">default:user::rwx</div><div class="line">default:group::rwx</div><div class="line">default:other::rwx</div></pre></td></tr></table></figure></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>We have learned how to restrict access to some users and manage these access using ACL’s.<br>There are many more things that we can do with ACL’s, this is only a silly example.<br>I hope tht you will find this post useful.<br>Stay tuned for new posts.</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/22/Restrict-Linux-users-to-certain-workspaces-only/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/09/18/My-marvelous-adventures-with-Docker-Part-II/">
                             My marvelous adventures with Docker - Part II
                         </a>
@@ -681,6 +788,25 @@
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://a-castellano.github.io/2016/09/22/Restrict-Linux-users-to-certain-workspaces-only/">
+                            <h3 class="media-heading">Restrict Linux users to certain workspaces</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    Sep 22, 2016
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -688,7 +814,7 @@
                 data-message-zero="no post found"
                 data-message-one="1 post found"
                 data-message-other="{n} posts found">
-                3 posts found
+                4 posts found
             </p>
         </div>
     </div>
