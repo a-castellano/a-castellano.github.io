@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://a-castellano.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://a-castellano.github.io/css/syntax.css' />
+    <title>Deploying VM&#39;s using Cloud-init - Álvaro Castellano - Personal Blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://a-castellano.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    
+
+    
+    <meta name="description"
+  content="After years of managing VM templates manually, I switched to using Cloud-init to automate network configuration, user management, and repository setup when deploying new VMs." />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://a-castellano.github.io/post/deploying-vms-using-cloudinit/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Deploying VM&#39;s using Cloud-init - Álvaro Castellano - Personal Blog" />
+<meta name="twitter:description"
+  content="After years of managing VM templates manually, I switched to using Cloud-init to automate network configuration, user management, and repository setup when deploying new VMs." />
+<meta name="twitter:site" content="https://a-castellano.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://a-castellano.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Deploying VM&#39;s using Cloud-init - Álvaro Castellano - Personal Blog">
+<meta property="og:description"
+  content="After years of managing VM templates manually, I switched to using Cloud-init to automate network configuration, user management, and repository setup when deploying new VMs." />
+<meta property="og:url" content="https://a-castellano.github.io/post/deploying-vms-using-cloudinit/" />
+<meta property="og:site_name" content="Deploying VM&#39;s using Cloud-init" />
+<meta property="og:image"
+  content="https://a-castellano.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2020-05-31 23:09:07 &#43;0200 &#43;0200" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://a-castellano.github.io/">
+        <img class="octicon" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://a-castellano.github.io/">
+            </label>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://a-castellano.github.io/">
+        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
+  
+<div class="application-main">
+  <div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://a-castellano.github.io/">
+                  <img class=" avatar-user"
+                    src="https://avatars0.githubusercontent.com/u/11519707?s=460&amp;u=c9ea059a83c4ea6f9daddec4fff28b1afacbe85a&amp;v=4"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://a-castellano.github.io/">Álvaro Castellano</a>
+                  </span>
+                  <span class="path-divider">/</span>
+                  <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
+                    <a href="https://a-castellano.github.io/post/deploying-vms-using-cloudinit/">Deploying VM&#39;s using Cloud-init</a>
+                  </strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sun, 31 May 2020 23:09:07 &#43;0200"
+                    class="no-wrap">
+                    Sun, 31 May 2020 23:09:07 &#43;0200</relative-time>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2262 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="the-beginning---vm-templates">The beginning - VM templates</h1>
+<p>Instead of having a server with multiple services installed, almost three years ago I started to use larger servers with KVM in order to manage multiple VM for those services. I had three &ldquo;template&rdquo; machines, for <em>Debian 9</em>, <em>Ubuntu 16.04</em> and <em>Ubuntu 18.04</em>. Each time I needed a new machine I followed the following steps:</p>
+<ul>
+<li>Clone the &ldquo;template&rdquo; VM.</li>
+<li>Power on the new VM.</li>
+<li>Reconfigure network config and DNS&rsquo;s in order to change VM network interface.</li>
+<li>Reboot the machine.</li>
+<li>Hope that I did not fail in any step.</li>
+<li>Start working with the new VM.</li>
+</ul>
+<p>After 5-10 minutes my new VM was ready, great&hellip;.</p>
+<p>Really? Well, let&rsquo;s face it, after two years doing this I&rsquo;ve got tired of deploying VM in that way.</p>
+<p>Also, in order to save time for next VM deploys I often update those templates (basic tools and kernel). At the end I had another three VM&rsquo;s to manage.</p>
+<h1 id="proxmox-clusters">Proxmox Clusters</h1>
+<p>Since last year my server has been running out of free space disk. I decided to rent a new server and start using <a href="https://www.proxmox.com/en/">Proxmox</a> instead of managing raw KVM servers.</p>
+<p>Cluster is working and it works great. Now let&rsquo;s create new VM&rsquo;s templates&hellip;. not again. I will end cloning VM&rsquo;s again. Let&rsquo;s try another way.</p>
+<h1 id="cloud-init-maybe-this-is-the-way">Cloud-init, (maybe) this is the way</h1>
+<p>What Cloud-init is? According with <a href="https://cloudinit.readthedocs.io/en/latest/">official documentation</a> Cloud-init is the industry standard multi-distribution method for cross-platform cloud instance initialization. It allows us to ensure certain configurations are present on boot time on our VM&rsquo;s such as some interesting things I&rsquo;m interested about:</p>
+<ul>
+<li>Network configuration</li>
+<li>User management</li>
+<li>Repository management</li>
+</ul>
+<p>Those three items would allow me getting rid of maintaining templates. So let&rsquo;s begin.</p>
+<h2 id="cloud-images">Cloud images</h2>
+<p>We need to stop using current Ubuntu server images and use <a href="https://cloud-images.ubuntu.com/">Ubuntu Cloud Images</a> which include Cloud-init configs. We will make changes in order to set Network configuration, users and repos.</p>
+<p>Download latest Ubuntu Bionic Cloud image</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /var/lib/vz/bionic.img https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+</span></span></code></pre></div><p>In order to edit Cloud-init images we need to install libguestfs-tools</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install libguestfs-tools
+</span></span></code></pre></div><p>Now is time to edit Cloud-init config:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>virt-edit -a /var/lib/vz/bionic.img /etc/cloud/cloud.cfg
+</span></span></code></pre></div><p>Let&rsquo;s review how I have changed the original file:</p>
+<h2 id="cloud-init-levels">Cloud-init levels</h2>
+<p>The following configuration will be the default one but it can be updated without changing this default configuration. We can add a Cloud-init device that can override this configuration. For example, we can change hostname or network config when creating new machine form our template.</p>
+<h2 id="cloud-init-modules">Cloud-init modules</h2>
+<p>Here are the modules that Cloud-init will load in order to make changes, here are only listed few of them, the ones I&rsquo;m using or I plan to use in the near future.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">cloud_init_modules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">write-files</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">growpart</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">resizefs</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">disk_setup</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">mounts</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">set_hostname</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">update_hostname</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">update_etc_hosts</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ca-certs</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">users-groups</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ssh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">cloud_config_modules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">emit_upstart</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">locale</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">set-passwords</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">grub-dpkg</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">apt-pipelining</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">apt-configure</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">timezone</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">runcmd</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">cloud_final_modules</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">package-update-upgrade-install</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">salt-minion</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">scripts-vendor</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ssh-authkey-fingerprints</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">keys-to-console</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">final-message</span>
+</span></span></code></pre></div><h3 id="disable-root-and-preserve-hostname">Disable root and preserve hostname</h3>
+<p>Root cannot log in directly in our server, also hostname can be altered by Cloud-init config.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">disable_root</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">preserve_hostname</span>: <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><h3 id="ssh-public-keys">SSH public keys</h3>
+<p>All created user will have the following ssh public keys authorized:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">ssh_authorized_keys</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">ssh-rsa MyPublicSSH Key</span>
+</span></span></code></pre></div><h3 id="user-config">User config</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">Our user **youruser** will be able to become root according with *sudo* given option</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">system_info</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># This will affect which distro class gets used</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">distro</span>: <span style="color:#ae81ff">ubuntu</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Default user name + that default users groups (if added/used)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">default_user</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">youruser</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">lock_passwd</span>: <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">gecos</span>: <span style="color:#ae81ff">Youruser</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">groups</span>:
+</span></span><span style="display:flex;"><span>      [
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">adm,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">audio,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">cdrom,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">dialout,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">dip,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">floppy,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">lxd,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">netdev,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">plugdev,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">sudo,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">video,</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">sudo</span>: [<span style="color:#e6db74">&#34;ALL=(ALL) NOPASSWD:ALL&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">shell</span>: <span style="color:#ae81ff">/bin/bash</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Automatically discover the best ntp_client</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ntp_client</span>: <span style="color:#ae81ff">auto</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Other config here will be given to the distro class and/or path classes</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">cloud_dir</span>: <span style="color:#ae81ff">/var/lib/cloud/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">templates_dir</span>: <span style="color:#ae81ff">/etc/cloud/templates/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">upstart_dir</span>: <span style="color:#ae81ff">/etc/init/</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ssh_svcname</span>: <span style="color:#ae81ff">ssh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">password</span>: <span style="color:#ae81ff">defaultuserpassword</span>
+</span></span></code></pre></div><p>Wait, are you posting a clear text password in your Cloud-init config? Why? Is it necessary?</p>
+<p>Yes, password has to be in clear text. No, it isn&rsquo;t necessary. Why am I setting a password? Because sometimes accidents happen and machines lose internet connection, I would like to enter into my VM using hypervisor screen. Of course we will set a sshd config that disallows password authentication.</p>
+<h3 id="timezone-and-locale-config">Timezone and locale config</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">timezone</span>: <span style="color:#e6db74">&#34;Europe/Madrid&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">locale</span>: <span style="color:#ae81ff">en_US</span>
+</span></span></code></pre></div><h3 id="ssh-config">SSH config</h3>
+<p>Cloud-init allows us to place files in our system, let&rsquo;s change default sshd config. Only logging using ssh keys is allowed and there is only one user allowed to connect.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">write_files</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">content</span>: <span style="color:#ae81ff">|</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">Port 22</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">Protocol 2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># HostKeys for protocol version 2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">HostKey /etc/ssh/ssh_host_rsa_key</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">HostKey /etc/ssh/ssh_host_dsa_key</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">HostKey /etc/ssh/ssh_host_ecdsa_key</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">HostKey /etc/ssh/ssh_host_ed25519_key</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#Privilege Separation is turned on for security</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">UsePrivilegeSeparation yes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Lifetime and size of ephemeral version 1 server key</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">KeyRegenerationInterval 3600</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">ServerKeyBits 1024</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Logging</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">SyslogFacility AUTH</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">LogLevel INFO</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># Authentication:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">LoginGraceTime 60</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PermitRootLogin prohibit-password</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">StrictModes yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PasswordAuthentication no</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PubkeyAuthentication yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">RSAAuthentication yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PubkeyAuthentication yes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">AllowUsers youruser</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">IgnoreRhosts yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">RhostsRSAAuthentication no</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">HostbasedAuthentication no</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PermitEmptyPasswords no</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">ChallengeResponseAuthentication no</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">X11DisplayOffset 10</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PrintMotd no</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">PrintLastLog yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">TCPKeepAlive yes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">AcceptEnv LANG LC_*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">Subsystem sftp /usr/lib/openssh/sftp-server</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">UsePAM yes</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/etc/ssh/sshd_config</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">owner</span>: <span style="color:#ae81ff">root:root</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">permissions</span>: <span style="color:#e6db74">&#34;0644&#34;</span>
+</span></span></code></pre></div><h3 id="apt-config">Apt config</h3>
+<p>My VM&rsquo;s do not use official Ubuntu repository lists, they use two repos:</p>
+<ul>
+<li><strong>repo-bionic.windmaker.net</strong> which stores a replica of official Ubuntu packages.</li>
+<li><strong>repo.daedalus-project.io</strong> which stores Daedalus Project packages and other packages like Percona releases.</li>
+</ul>
+<p>First, we need to disable all Ubuntu repos first using <em>disable_suites</em> directive. After that we set our repo URL&rsquo;s and their GPG keys.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">apt</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">disable_suites</span>: [<span style="color:#ae81ff">updates, backports, security, proposed, release]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">repo-bionic.list</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">source</span>: <span style="color:#e6db74">&#34;deb http://repo-bionic.windmaker.net/ bionic main&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">key</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        -----BEGIN PGP PUBLIC KEY BLOCK-----
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        mQGNBFsf464BDACpTuXB5TO1Xaca2UfI9JeO2PmYOSKtnM6Fm+xkhP/XwM1+NIOG
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        guvw/+g3JVmUN6cMklVDhUgE46iVn7OccXIKYoKFRWLFRkPx7KGFdxA2bxQ/N6zt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        TyfxUyskRQPvDbbBX/ExGsVl/Y+1hPullJlvuXja6pUXIa/q0I+/WYu6rlnDlp6Y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        SuTVlGlQY2TJ7ActOsOAO+TxkLonn/NJRPmJUmZW8foWgPMDgIIj/f800os9iFjx
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        89cykmHgDc3Lt/9YE/OTfvrirmqKdlatcb+S9zAJ00F9/w+30qh+Y9p/IzgbxF6j
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ebuW8Ag6zAlvNgQZmYigbeZJoUZtBd9cM5Tm5gQZRoyCy+Vf00dl2Acl2OZ84OGA
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        L3zrkeb9Mz40/FazEZsMpr2TtVQmYKRY8NRGX8RULxaePtagDos2nb7Em/MAVyI5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ar2/Zh0wYxbRhjvBfP0gn97lprov72Ce8F/GoP8K798t5b0RoHtXQdarBO+Z7KuC
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        CbsIAXNA5Zl25gMAEQEAAbQ6w4FsdmFybyBDYXN0ZWxsYW5vIFZlbGEgPGFsdmFy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        by5jYXN0ZWxsYW5vLnZlbGFAZ21haWwuY29tPokB1AQTAQoAPhYhBH0JhQsOihgj
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        KUwRwfiEJpJagjkJBQJbH+OuAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMBAh4B
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        AheAAAoJEPiEJpJagjkJzEUL/1IchCrksbt95ngsWpfBU9pP69xSlGoJwQKWBycy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        uShkHCtH5F6DNRYVfFNbvgPaH2vvZrtKNzZqGfhJbWRvR1owdF4XOz0tPHTcU3NY
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        MJT0KfRh8rms8Ai/jDdb9OY2kReqddUAyLLjdfd0NC+g5DYF5zagliEpkxWYAi/0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        H6tpB0Rg25L0Iu/M/toIu6VSCZqVRTfggrPKWddaA/kGGmbHKyAsfLEXkwXIT2IK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        N7nXNJCGCWrgmWtCs/8VVofgqspOoyU8ZxfsKrvlA+yEi53iOuDcLOycw6uRpjX9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        F93T2Vvt0bjPq85cViABZHkwXXUbRwxD9GOLVmGD+e7S6Vbw04mJff3phZ6x/AIP
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        iT8PZOUSbngvS1SnKOfK1dSvwkoeMhV1xn2NH7lJPQmMwh3o3AVLGidIRfkegduK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        iG49Byn7qVhQu/6jKEyWHS2lMw0uKa34MRRsYtqqreUCp2F/51vSrJxxIgLF2pM6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        df/QgV3fNq9tEuP0TE52OSPx6rkBjQRbH+OuAQwA4bcfEDVDLyywSREfFdLuK2+E
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        7oPLTGVw6T4fKhsR47hSydOMXC7RhLXKIUjZX2IL1u0gNzVJQuCkbHkSxdr6rwsc
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        IjIuWgkzLfSw5z1BzHjJbfxS32XhQdM4noFx7KvFjh2Umwz1SPWvcj4Az1uX0kbL
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        gsK5eJQ1YBz2lMdhZKMLNMZSsNnHuxXg6EfpfUHDusiTBBdttO2kQjl3eC4wZaOc
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        VPMYO2HjeWRaK9Vhvt8aF/PU0bijBZZ69ZSv/E9wjgFlgvPsvMA92WNCawnC0JwW
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        kosL+qjbn43EldTZe+RWTbgzW/e9bvCOUpeWlHKl1pncccM0LPWAGZi/HKQUFIds
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        AyfJLK4Vr0p1s9p6TghiF0RVlvwWdRHhfRTLjASrHuVbh+eth7LC6/ZHhRrVdZTa
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        qfSYNfvW0nUH/uF9XBr21XWTn67i8KiVDuveAPebq+R+SwVidWpin3t9U6ykODxc
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        2gjIL25nRvZuptb0hHIm5OCnW8yi5VO3TLKZQBWlABEBAAGJAbwEGAEKACYWIQR9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        CYULDooYIylMEcH4hCaSWoI5CQUCWx/jrgIbDAUJA8JnAAAKCRD4hCaSWoI5CbqJ
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        C/oDT5G9HGBDkfxv35ohU8p/J2tnOBmhKGvCLfIsK068bW7F/zX+P72yEY6QwT+Y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        IPC2cnfwhJ31Pd8muYhn8b7MJwSNdR0nxA3ORmhjMYGlbq4jH32RLvU9Qk6JA+Oh
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Xyw9uglilp454BLqe3ew+PxerN8nZKvVTwlmfZmI15N7PG3DP18/P8r73EUR6+ud
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        F27vELLmgoqShOYRvh+yLsOcxPQlV5eCY5rcu0avATtuFrYpy02jTk5/ABMaMr5V
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        /RooRtH3L5iueM2fdg5JIgyQ1cILPbsW+v53OIthjHNfgdIXGQO3svzA8U1/5qJk
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        oghFyg6SiG/2+bdo2ociPGMu9VH/0o3Z9+YRrKeNJIwe1rYeWH/L8qJQ3kjWFcpB
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        OfY50O2FiL1O24M8nOH5Ub3bdCH8+kW4SRQsUCsbnSIQzPaDJyO6vJ5myHh8B6IY
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ffYSW0AkNsBCjlAysc0w3X/CeuW0yVGg4PQUWehVoBvob1/08DvGHiq285hBftoB
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Gb4=
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        =Uzuz
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        -----END PGP PUBLIC KEY BLOCK-----</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">repo-daedalus-project.list</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">source</span>: <span style="color:#e6db74">&#34;deb [arch=amd64] http://repo.daedalus-project.io/ bionic main&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">key</span>: |<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        -----BEGIN PGP PUBLIC KEY BLOCK-----
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        mQGNBF5s0RQBDAC5CSssBQGpW/cm3T98YqjIbowMnw9AJ3En+Mbt+hX2BdBBAhEe
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        +ReHCMiydJDcsm6pIHpMccGtnPykIS51yNv6syb4aFAagauTXrkXlxWQBoy6xPnK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ULOZYcBOUR4m3Mmt2LfmbcoZJqRfNudTxRF/mpLYOVc1kj7nnj41RTIVERmRdBTd
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        GPOGZxZufTeKmahVpyBywiKTqWZu3t7zFiO9CttyDcV6T0RJe4K+lOemutmDNZc3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        39kElv3SrxeTYt1NdEJuIkYsjE5agz+2+ARB70M0Cze/Q9mB/rKqznwZlXUorG4W
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        JB32rCZ8BXWlTdGhC/jFHk8vNoNFfauk93n77brVuOzZOYKpLDvYw7Ve1AvGA1Vi
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        zsjbF0rOCBoCln7gyf3/JBQbbPyaKtTytl+V/MlueTJ37ZkQ3Jrt98WLS0UfMi5F
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        xo+MlkAzTpTjN9tZPz0hSBSXRBlPesz9X7fdG1nQhs/74Vf/PURhViknSw+w5sdM
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        sTMFL7bAfcaS1O0AEQEAAbQfV2luZG1ha2VyIDxhZG1pbkB3aW5kbWFrZXIubmV0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        PokB1AQTAQoAPhYhBMb8c9m0kYHPT9BVPHSXEhkPd7wpBQJebNEUAhsDBQkDwmcA
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        BQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHSXEhkPd7wpFwsL/RbaThK7D/m4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        2HzpanBQF6qrA8Lj+lX/mSrCGDcLKLnrtu+YtU7rri5GC34GV0MkU98XbuBNIYaC
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        5JylK59e1SR5sq/5CvuCgIgx8b0UzHtlgIngzY3Ij26rC8AmlnHxa9/jTtD6a4VC
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        tp3YI+xtkpRciE6KLcg/p607zWwCpUpnXFgCsPf5U6XyvEEvrZu3argAenZHURwH
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ADitwUPQAQWK3ipSXRuVCynI3YDuWqZOVNj1plFKXbvvC5lRd49swmcqjweKkM56
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        1+4dNi2GUVklsaFDTa8aQsj382fYw4N8hPeQspQJiBMhzds0xI0JjnoYLkoZfX/u
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        NqIRl247dse5g2u4KUjel/IOAgb7lYc69zX0mH0gbijz7Na4Cfys3QH4A1Kqi771
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        hTEQhg0TUMbAjteK8c738Os1aJbhiUa4+V4eIFhwD0fmhy6EB4b1rUNCywHPIfPX
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ARadTs5uLe9q5TGZyWaGFThIfMz5xa9owe2TsLtWlz3sIDPHNIMsErkBjQRebNEU
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        AQwAuIadvP0HFGeqkJRRNscyPeggJv7aPURiRUwHduOotOn8EwhBUxwvZMI9aJ9D
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        teY7vKsQSVwN4xf8edUM+Bn6FAefQgvDNKGKX4TQO2T0pV0yqoCNnSwzLRJvqi4z
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        hzYI6k2/Tz0NCV7AJA39q1f94J0P4g6ZK0hzmFjacT/gdb0mbs3CYg9ZoKQnQ+af
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        nXlcnLHqAyeNLnJbJNU36SbAsjdh58YhVcAxPwLkByxBONSIC7qY+JSmJ1ygbfZK
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        QtPk3WkgldduC6uBSAYMQlBPXUjZJK+V3xZGM39/mvvyHyEQwIblnwcNvdSi3WI2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        SqNb644ue8EB6PW/69mIJb3RxX67pd0+tPcaXUG8GBQgR4y7kvxMgOCU8asXe0T/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        nslds6BD3KkPcGsnicziS322msmJ0h0LVR5QxdSP/96cjWrpmCqKaZ79sNDrYLb/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        C3gAzwyFFVnUrCgFHBQ8Rc6+mQ/6pXtq4ZovtcnjJSIsv3cJkVOALjVD2TNu0/N7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        VfUVABEBAAGJAbwEGAEKACYWIQTG/HPZtJGBz0/QVTx0lxIZD3e8KQUCXmzRFAIb
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        DAUJA8JnAAAKCRB0lxIZD3e8KYrYC/9/GvKHGZ+uEYmdJq9CzqUVy5BZYQLsuIV4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        h7WbRKVjtCWP00STclSxEm6eEY8PzawiEC+AET0OAGE+krRRWgOzPNDnrL7IMi3n
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        HR4Xj/FMUCCgCvNMBYjVPZyBqY5vwyr8Ta3yWf/eN+cxZzpXo/SOA4Pfenci4Am/
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        9Y7pGQoOgAGIoPB2fmQg5ttyxr0GfBBaj0aE1aB7osICgQdPriC+Gu3aHWT6kUsz
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        8+2zuIXsHD66aN+q5XxKamptOU80B7NVut+XhFrFa/Qit+IPJDfvxywSRWb6R+65
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        u+SW8rcCq1AecbCRqO++vmkHS2QVWbDQtoJ6GEV6BRtHXWJmPaDdLulacvkKEcA+
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        ZALHZKyvHG6HW/IhO4jcVQ5uh2RwjGyIE4Y7yJ6PZs+MkcISw438NapOT4CY8Bs4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        aIiNytCfCfGOzvOgttxSyhGQhgVZz1lMogl7OoOOalLgTRUOsOzVg90Y8vgNR4g6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        eZiQKhRY1gf+exPCSjnji7snbdsSqX0=
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        =FDFJ
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        -----END PGP PUBLIC KEY BLOCK-----</span>
+</span></span></code></pre></div><h3 id="dns-config">DNS config</h3>
+<p>After cloning each template we will set Network configuration but we must configure systemd resolv in this step</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">write_files</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">content</span>: <span style="color:#ae81ff">|</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      [<span style="color:#ae81ff">Resolve]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ae81ff">DNS=10.XXX.YYY.10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/etc/systemd/resolved.conf</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">owner</span>: <span style="color:#ae81ff">root:root</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">permissions</span>: <span style="color:#e6db74">&#34;0644&#34;</span>
+</span></span></code></pre></div><p>Entire Cloud-init file can be found <a href="https://gist.github.com/a-castellano/49cee1dbf1f1e29c81d44536d98189a2">here</a>.</p>
+<h2 id="creating-a-template-vm">Creating a template VM</h2>
+<p>After editing our Cloud-init file, let&rsquo;s create a VM template using Proxmox.</p>
+<p>The new template will be named <strong>bionicTemplate</strong>. We will set a net card attached to our VM&rsquo;s network, in my case vmbr1. RAM is set to 2048Mb</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm create <span style="color:#ae81ff">100</span> --memory <span style="color:#ae81ff">2048</span> --net0 virtio,bridge<span style="color:#f92672">=</span>vmbr1 --name<span style="color:#f92672">=</span>bionicTmeplate
+</span></span></code></pre></div><p>Import Ubuntu Bionic Cloud image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm importdisk <span style="color:#ae81ff">100</span> /var/lib/vz/bionic.img local
+</span></span></code></pre></div><p>Attach the new disk to our VM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">100</span> --scsihw virtio-scsi-pci --virtio0 local:100/vm-100-disk-0.raw
+</span></span></code></pre></div><p>We will need to add a cloudinit disk too:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">100</span> --ide2 local:cloudinit
+</span></span></code></pre></div><p>Set first disk as bootable one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">100</span> --boot c --bootdisk virtio0
+</span></span></code></pre></div><p>Set the screen using a serial socket, this config will allow us to copy text from hipervisor screen:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">100</span> --serial0 socket --vga serial0
+</span></span></code></pre></div><p>Finally, we create a template from this VM.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm template <span style="color:#ae81ff">100</span>
+</span></span></code></pre></div><h2 id="creating-a-new-vm">Creating a new VM</h2>
+<p>Time to create a new VM using this new template:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm clone <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">123</span> --name Test --full
+</span></span></code></pre></div><p>Let&rsquo;s resize disk before start the VM:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm resize <span style="color:#ae81ff">123</span> virtio0 +30G
+</span></span></code></pre></div><p>Each VM must have its own IP address, we config it now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">123</span> --ipconfig0 ip<span style="color:#f92672">=</span>10.XXX.YYY.10/16,gw<span style="color:#f92672">=</span>10.XXX.1.11
+</span></span><span style="display:flex;"><span>qm set <span style="color:#ae81ff">123</span> --nameserver 10.XXX.ZZZ.10
+</span></span></code></pre></div><p>Time to start the VM, on startup we will see how our config is applied:</p>
+<p>Our network config is applied:</p>
+<pre tabindex="0"><code>         Starting Initial cloud-init job (pre-networking)...
+[   21.020495] cloud-init[593]: Cloud-init v. 19.4-33-gbb4131a2-0ubuntu1~18.04.1 running &#39;init-local&#39; at Sun, 31 May 2020 17:49:26 +0000. Up 20.11 seconds.
+[  OK  ] Started Initial cloud-init job (pre-networking).
+[  OK  ] Reached target Network (Pre).
+         Starting Network Service...
+[  OK  ] Started Network Service.
+         Starting Network Name Resolution...
+         Starting Wait for Network to be Configured...
+[  OK  ] Started Network Name Resolution.
+[  OK  ] Reached target Host and Network Name Lookups.
+[  OK  ] Reached target Network.
+[  OK  ] Started Wait for Network to be Configured.
+         Starting Initial cloud-init job (metadata service crawler)...
+[   24.148124] cloud-init[701]: Cloud-init v. 19.4-33-gbb4131a2-0ubuntu1~18.04.1 running &#39;init&#39; at Sun, 31 May 2020 17:49:30 +0000. Up 23.82 seconds.
+[   24.158206] cloud-init[701]: ci-info: ++++++++++++++++++++++++++++++++++++++Net device info++++++++++++++++++++++++++++++++++++++
+[   24.162608] cloud-init[701]: ci-info: +--------+------+------------------------------+-------------+--------+-------------------+
+[   24.167279] cloud-init[701]: ci-info: | Device |  Up  |           Address            |     Mask    | Scope  |     Hw-Address    |
+[   24.171305] cloud-init[701]: ci-info: +--------+------+------------------------------+-------------+--------+-------------------+
+[   24.174399] cloud-init[701]: ci-info: | ens18  | True |        10.XXX.YYY.10         | 255.255.0.0 | global | ce:47:27:a4:12:cb |
+[   24.177641] cloud-init[701]: ci-info: | ens18  | True | fe80::cc47:27ff:fea4:12cb/64 |      .      |  link  | ce:47:27:a4:12:cb |
+[   24.180768] cloud-init[701]: ci-info: |   lo   | True |          127.0.0.1           |  255.0.0.0  |  host  |         .         |
+[   24.184262] cloud-init[701]: ci-info: |   lo   | True |           ::1/128            |      .      |  host  |         .         |
+[   24.189674] cloud-init[701]: ci-info: +--------+------+------------------------------+-------------+--------+-------------------+
+[   24.194320] cloud-init[701]: ci-info: ++++++++++++++++++++++++++++Route IPv4 info++++++++++++++++++++++++++++
+[   24.198817] cloud-init[701]: ci-info: +-------+-------------+-------------+-------------+-----------+-------+
+[   24.202828] cloud-init[701]: ci-info: | Route | Destination |   Gateway   |   Genmask   | Interface | Flags |
+[   24.206859] cloud-init[701]: ci-info: +-------+-------------+-------------+-------------+-----------+-------+
+[   24.209845] cloud-init[701]: ci-info: |   0   |   0.0.0.0   | 10.XXX.1.11 |   0.0.0.0   |   ens18   |   UG  |
+[   24.212480] cloud-init[701]: ci-info: |   1   |  10.XXX.0.0 |   0.0.0.0   | 255.255.0.0 |   ens18   |   U   |
+[   24.215526] cloud-init[701]: ci-info: +-------+-------------+-------------+-------------+-----------+-------+
+[   24.219341] cloud-init[701]: ci-info: +++++++++++++++++++Route IPv6 info+++++++++++++++++++
+[   24.221671] cloud-init[701]: ci-info: +-------+-------------+---------+-----------+-------+
+[   24.223971] cloud-init[701]: ci-info: | Route | Destination | Gateway | Interface | Flags |
+[   24.227114] cloud-init[701]: ci-info: +-------+-------------+---------+-----------+-------+
+[   24.230247] cloud-init[701]: ci-info: |   1   |  fe80::/64  |    ::   |   ens18   |   U   |
+[   24.233530] cloud-init[701]: ci-info: |   3   |    local    |    ::   |   ens18   |   U   |
+[   24.239004] cloud-init[701]: ci-info: |   4   |   ff00::/8  |    ::   |   ens18   |   U   |
+[   24.242550] cloud-init[701]: ci-info: +-------+-------------+---------+-----------+-------+
+</code></pre><p>Custom repos are added to VM&rsquo;s repo list:</p>
+<pre tabindex="0"><code>Test login: [   35.727835] cloud-init[1090]: Generating locales (this might take a while)...
+[   36.341105] cloud-init[1090]:   en_US.ISO-8859-1... done
+[   36.342903] cloud-init[1090]: Generation complete.
+[   39.693040] cloud-init[1090]: Get:1 http://repo.daedalus-project.io bionic InRelease [5152 B]
+[   39.762068] cloud-init[1090]: Get:2 http://repo-bionic.windmaker.net bionic InRelease [3000 B]
+[   39.872322] cloud-init[1090]: Get:3 http://repo.daedalus-project.io bionic/main amd64 Packages [70.4 kB]
+[   40.040415] cloud-init[1090]: Get:4 http://repo-bionic.windmaker.net bionic/main amd64 Packages [15.2 MB]
+[   47.544781] cloud-init[1090]: Fetched 15.3 MB in 5s (2863 kB/s)
+[   48.836633] cloud-init[1090]: Reading package lists...
+[   48.938858] cloud-init[1090]: Cloud-init v. 19.4-33-gbb4131a2-0ubuntu1~18.04.1 running &#39;modules:config&#39; at Sun, 31 May 2020 17:49:42 +0000. Up 35.45 seconds.
+[   49.690566] cloud-init[1735]: Reading package lists...
+[   49.854240] cloud-init[1735]: Building dependency tree...
+[   49.857138] cloud-init[1735]: Reading state information...
+[   49.951017] cloud-init[1735]: Calculating upgrade...
+[   50.062925] cloud-init[1735]: The following package was automatically installed and is no longer required:
+[   50.067178] cloud-init[1735]:   grub-pc-bin
+[   50.069484] cloud-init[1735]: Use &#39;apt autoremove&#39; to remove it.
+[   50.116744] cloud-init[1735]: The following packages will be upgraded:
+[   50.121606] cloud-init[1735]:   init init-system-helpers iproute2
+[   50.158913] cloud-init[1735]: 3 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[   50.161701] cloud-init[1735]: Need to get 812 kB of archives.
+[   50.165186] cloud-init[1735]: After this operation, 285 kB of additional disk space will be used.
+[   50.168542] cloud-init[1735]: Get:1 http://repo-bionic.windmaker.net bionic/main amd64 init-system-helpers all 1.56+nmu1~ubuntu18.04.1 [38.2 kB]
+[   50.193411] cloud-init[1735]: Get:2 http://repo-bionic.windmaker.net bionic/main amd64 init amd64 1.56+nmu1~ubuntu18.04.1 [6040 B]
+[   50.212301] cloud-init[1735]: Get:3 http://repo-bionic.windmaker.net bionic/main amd64 iproute2 amd64 4.18.0-1ubuntu2~ubuntu18.04.1 [768 kB]
+</code></pre><p>Finally our public key is added to <strong>youruser</strong> authorized keys:</p>
+<pre tabindex="0"><code>[   54.253006] cloud-init[1735]: Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+ci-info: +++++++++++++++++Authorized keys from /home/ventus/.ssh/authorized_keys for user ventus+++++++++++++++++
+ci-info: +---------+-------------------------------------------------+---------+--------------------------+
+ci-info: | Keytype |                Fingerprint (md5)                | Options |         Comment          |
+ci-info: +---------+-------------------------------------------------+---------+--------------------------+
+ci-info: | ssh-rsa | 50:12:39:be:84:c1:f1:b6:89:6c:43:85:40:36:b1:f5 |    -    | yoursshid@yourhost.local |
+ci-info: +---------+-------------------------------------------------+---------+--------------------------+
+</code></pre><h2 id="testing-vm-access">Testing VM access</h2>
+<p>Let&rsquo;s login into our VM and check all our configs are working:</p>
+<pre tabindex="0"><code>$ ssh ventus@10.XXX.YYY.10
+Warning: Permanently added &#39;10.XXX.YYY.10&#39; (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 4.15.0-101-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun May 31 20:24:51 CEST 2020
+
+  System load:  0.81              Processes:            84
+  Usage of /:   3.4% of 31.04GB   Users logged in:      0
+  Memory usage: 6%                IP address for ens18: 10.XXX.YYY.10
+  Swap usage:   0%
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user &#34;root&#34;), use &#34;sudo &lt;command&gt;&#34;.
+See &#34;man sudo_root&#34; for details.
+
+ventus@Test:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            985M     0  985M   0% /dev
+tmpfs           200M  616K  199M   1% /run
+/dev/vda1        32G  1.1G   30G   4% /
+tmpfs           997M     0  997M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           997M     0  997M   0% /sys/fs/cgroup
+/dev/vda15      105M  3.6M  101M   4% /boot/efi
+tmpfs           200M     0  200M   0% /run/user/1000
+ventus@Test:~$ sudo su
+root@Test:/home/ventus# ip add
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens18: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 6e:38:1b:41:f6:7a brd ff:ff:ff:ff:ff:ff
+    inet 10.XXX.YYY.10/16 brd 10.XXX.255.255 scope global ens18
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6c38:1bff:fe41:f67a/64 scope link
+       valid_lft forever preferred_lft forever
+root@Test:/home/ventus# cat /etc/apt/sources.list.d/repo-bionic.list
+deb http://repo-bionic.windmaker.net/ bionic main
+root@Test:/home/ventus# cat /etc/apt/sources.list.d/repo-daedalus-project.list
+deb [arch=amd64] http://repo.daedalus-project.io/ bionic main
+</code></pre><h2 id="final-steps">Final steps</h2>
+<p>After setting up the VM we should remove Cloud-Init device:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm set <span style="color:#ae81ff">123</span> --ide2 none
+</span></span></code></pre></div></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://a-castellano.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://a-castellano.github.io/css/toc.css' />
+
+  
+</div>
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://a-castellano.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://a-castellano.github.io/js/github-style.js"></script>
+
+
+
+
+
+
+
+</html>

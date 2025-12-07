@@ -1,101 +1,107 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><link crossorigin=anonymous media=all rel=stylesheet href=https://a-castellano.github.io/css/frameworks.css><link crossorigin=anonymous media=all rel=stylesheet href=https://a-castellano.github.io/css/github.css><link crossorigin=anonymous media="(prefers-color-scheme: dark)" rel=stylesheet href=https://a-castellano.github.io/css/dark.css><meta name=viewport content="width=device-width"><title>My marvelous adventures with Docker - Part II - Álvaro Castellano - Personal Blog</title><link rel=icon type=image/x-icon class=js-site-favicon href=https://a-castellano.github.io/images/favicon.ico><meta name=theme-color content="#1e2327"></head><body class="env-production emoji-size-boost page-responsive page-profile"><div class="position-relative js-header-wrapper"><span class="Progress progress-pjax-loader position-fixed width-full js-pjax-loader-bar"><span class="progress-pjax-loader-bar top-0 left-0" style=width:0%></span></span><header class="Header py-lg-0 js-details-container Details flex-wrap flex-lg-nowrap p-responsive" role=banner><div class="Header-item d-none d-lg-flex"><a class=Header-link href=https://a-castellano.github.io/ aria-label=Homepage data-ga-click="Header, go to dashboard, icon:logo"><svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.013 8.013.0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></div><div class="Header-item Header-item--full flex-column flex-lg-row width-full flex-order-2 flex-lg-order-none mr-0 mr-lg-3 mt-3 mt-lg-0 Details-content--hidden"><div class="header-search flex-self-stretch flex-lg-self-auto mr-0 mr-lg-3 mb-3 mb-lg-0 scoped-search site-scoped-search js-site-search position-relative js-jump-to" role=combobox aria-owns=jump-to-results aria-label="Search or jump to" aria-haspopup=listbox aria-expanded=false><div class=position-relative></div></div></div><nav class=d-flex aria-label=Global><a class="js-selected-navigation-item Header-link py-lg-3">&nbsp;</a></nav><div class="Header-item Header-item--full flex-justify-center d-lg-none position-relative" style=margin-right:auto><a class=Header-link href=https://a-castellano.github.io/ aria-label=Homepage data-ga-click="Header, go to dashboard, icon:logo"><svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.013 8.013.0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></div><div class="Header-item position-relative mr-0 d-none d-lg-flex"><details class="details-overlay details-reset"><summary class=Header-link aria-label="View profile and more" data-ga-click="Header, show menu, icon:avatar"><img alt class=avatar src="https://avatars0.githubusercontent.com/u/11519707?s=460&u=c9ea059a83c4ea6f9daddec4fff28b1afacbe85a&v=4" height=20 width=20></summary></details></div></header></div><div id=start-of-content class=show-on-focus></div><div id=js-flash-container></div><div class=application-main data-commit-hovercards-enabled><div itemscope itemtype=http://schema.org/SoftwareSourceCode><main><div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-0 pt-lg-4"><div class="repohead-details-container clearfix container-lg p-responsive d-none d-lg-block"><div class="mb-3 d-flex"><h1 class="public css-truncate float-none flex-auto width-fit pl-0"><a class="avatar mr-1" href=https://a-castellano.github.io/about/><img src="https://avatars0.githubusercontent.com/u/11519707?s=460&u=c9ea059a83c4ea6f9daddec4fff28b1afacbe85a&v=4" width=26 height=26></a>
-<span class=author><a href=https://a-castellano.github.io/>Álvaro Castellano</a></span>
-<span class=path-divider>/</span>
-<strong itemprop=name class=css-truncate-target style=max-width:410px><a href=https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-ii/>My marvelous adventures with Docker - Part II</a></strong><div class="d-block text-small text-gray">Created <time-ago datetime=2016-09-18 class=no-wrap title="Created at 2016/09/18">2016-09-18</time-ago>
-<span class=file-info-divider></span>Modifyed <time-ago datetime=2016-09-18 class=no-wrap title="Modified  at 2016/09/18">2016-09-18</time-ago></div></h1></div></div></div><div class="container-lg clearfix new-discussion-timeline experiment-repo-nav p-responsive"><div class=repository-content><div class="Box mt-3 position-relative"><div class="Box-header py-2 d-flex flex-column flex-shrink-0 flex-md-row flex-md-items-center"><div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">2528 Words</div></div><div id=readme class="Box-body readme blob instapaper_body js-code-block-container"><article class="markdown-body entry-content p-3 p-md-6" itemprop=text><p><strong>In this post I continue my adventures with Docker. After creating our first image and container in the previous <a href=https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-i/>post</a> I will look into how docker images can autostart services and how to establish communication between containers.</strong></p><p>During this post we are creating images and storing them in Docker Hub. All my images are stored in my <a href=https://hub.docker.com/r/acastellano/archonweb/>ArchonWeb</a> repository. All the scripts used in this post an be found in my <a href=https://github.com/a-castellano/docker>Docker repo</a>.</p><p>First of all we should remove all containers and images in order to maintain our workspace clean.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
-</code></pre></div><p>Let&rsquo;s create again our container.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND
-</code></pre></div><p>This command looks nice but&mldr; What all these arguments mean?</p><p><strong>&ndash;name:</strong> The name of the container
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width"><script type=application/javascript src=https://a-castellano.github.io/js/theme-mode.js></script><link rel=stylesheet href=https://a-castellano.github.io/css/frameworks.min.css><link rel=stylesheet href=https://a-castellano.github.io/css/github.min.css><link rel=stylesheet href=https://a-castellano.github.io/css/github-style.css><link rel=stylesheet href=https://a-castellano.github.io/css/light.css><link rel=stylesheet href=https://a-castellano.github.io/css/dark.css><link rel=stylesheet href=https://a-castellano.github.io/css/syntax.css><title>My marvelous adventures with Docker - Part II - Álvaro Castellano - Personal Blog</title><link rel=icon type=image/x-icon href=https://a-castellano.github.io/images/favicon.ico><meta name=theme-color content="#1e2327"><meta name=description content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish communication between containers.
+During this post we are creating images and storing them in Docker Hub. All my images are stored in my ArchonWeb repository. All the scripts used in this post an be found in my Docker repo.
+"><meta name=keywords content><meta name=robots content="noodp"><link rel=canonical href=https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-ii/><meta name=twitter:card content="summary"><meta name=twitter:title content="My marvelous adventures with Docker - Part II  - Álvaro Castellano - Personal Blog"><meta name=twitter:description content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish communication between containers.
+During this post we are creating images and storing them in Docker Hub. All my images are stored in my ArchonWeb repository. All the scripts used in this post an be found in my Docker repo.
+"><meta name=twitter:site content="https://a-castellano.github.io/"><meta name=twitter:creator content><meta name=twitter:image content="https://a-castellano.github.io/"><meta property="og:type" content="article"><meta property="og:title" content="My marvelous adventures with Docker - Part II  - Álvaro Castellano - Personal Blog"><meta property="og:description" content="In this post I continue my adventures with Docker. After creating our first image and container in the previous post I will look into how docker images can autostart services and how to establish communication between containers.
+During this post we are creating images and storing them in Docker Hub. All my images are stored in my ArchonWeb repository. All the scripts used in this post an be found in my Docker repo.
+"><meta property="og:url" content="https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-ii/"><meta property="og:site_name" content="My marvelous adventures with Docker - Part II "><meta property="og:image" content="https://a-castellano.github.io/"><meta property="og:image:width" content="2048"><meta property="og:image:height" content="1024"><meta property="article:published_time" content="2016-09-18 21:24:07 +0200 +0200"></head><body><div style=position:relative><header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"><div class="Header-item mobile-none" style=margin-top:-4px;margin-bottom:-4px><a class=Header-link href=https://a-castellano.github.io/><img class=octicon height=32 width=32 src></a></div><div class="Header-item d-md-none"><button class="Header-link btn-link js-details-target" type=button onclick='document.querySelector("#header-search").style.display=document.querySelector("#header-search").style.display=="none"?"block":"none"'>
+<svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button></div><div style=display:none id=header-search class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"><div class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"><div class=position-relative><form target=_blank action=https://www.google.com/search accept-charset=UTF-8 method=get autocomplete=off><label class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"><input type=text class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable" name=q placeholder=Search autocomplete=off>
+<input type=hidden name=q value=site:https://a-castellano.github.io/></label></form></div></div></div><div class="Header-item Header-item--full flex-justify-center d-md-none position-relative"><a class=Header-link href=https://a-castellano.github.io/><img class="octicon octicon-mark-github v-align-middle" height=32 width=32 src></a></div><div class=Header-item style=margin-right:0><a href=javascript:void(0) class="Header-link no-select" onclick=switchTheme()><svg style="fill:var(--color-profile-color-modes-toggle-moon)" class="no-select" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.52208 7.71754c3.05612.0 5.53362-2.47748 5.53362-5.5336C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961 9.95801 1.07727 10.3495.771159 10.6474.99992c1.4679 1.12724 2.4141 2.90007 2.4141 4.89391.0 3.40575-2.7609 6.16667-6.16665 6.16667-2.94151.0-5.40199-2.0595-6.018122-4.81523C.794841 6.87902 1.23668 6.65289 1.55321 6.85451 2.41106 7.40095 3.4296 7.71754 4.52208 7.71754z"/></svg></a></div></header></div><div id=search-result class="container-lg px-3 new-discussion-timeline" style=display:none></div><div class=application-main><div><main><div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4"><div class=px-0><div class="mb-3 d-flex px-3 px-md-3 px-lg-5"><div class="flex-auto min-width-0 width-fit mr-3"><div class=d-flex><div class="d-none d-md-block"><a class="avatar mr-2 flex-shrink-0" href=https://a-castellano.github.io/><img class=avatar-user src="https://avatars0.githubusercontent.com/u/11519707?s=460&amp;u=c9ea059a83c4ea6f9daddec4fff28b1afacbe85a&amp;v=4" width=32 height=32></a></div><div class="d-flex flex-column"><h1 class="break-word f3 text-normal mb-md-0 mb-1"><span class=author><a href=https://a-castellano.github.io/>Álvaro Castellano</a>
+</span><span class=path-divider>/</span>
+<strong class="css-truncate css-truncate-target mr-1" style=max-width:410px><a href=https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-ii/>My marvelous adventures with Docker - Part II</a></strong></h1><div class="note m-0">Created <relative-time datetime="Sun, 18 Sep 2016 21:24:07 +0200" class=no-wrap>Sun, 18 Sep 2016 21:24:07 +0200</relative-time></div></div></div></div></div></div></div><div class="container-lg px-3 new-discussion-timeline"><div class="repository-content gist-content"><div><div class="js-gist-file-update-container js-task-list-container file-box"><div id=file-pytest class="file my-2"><div id=post-header class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style=z-index:2><div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto"><div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0"><summary id=toc-toggle onclick=clickToc() class="btn btn-octicon m-0 mr-2 p-2"><svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered"><path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zm0 5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zm0 5a.75.75.0 000 1.5h8.5a.75.75.0 000-1.5h-8.5zM3 8A1 1 0 111 8a1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"/></svg></summary><details-menu class=SelectMenu id=toc-details style="display: none;"><div class="SelectMenu-modal rounded-3 mt-1" style=max-height:340px><div class="SelectMenu-list SelectMenu-list--borderless p-2" style=overscroll-behavior:contain id=toc-list></div></div></details-menu>2471 Words</div><div class="file-actions flex-order-2 pt-0"></div></div></div><div class="Box-body px-5 pb-5" style=z-index:1><article class="markdown-body entry-content container-lg"><p><strong>In this post I continue my adventures with Docker. After creating our first image and container in the previous <a href=https://a-castellano.github.io/posts/my-marvelous-adventures-with-docker-part-i/>post</a> I will look into how docker images can autostart services and how to establish communication between containers.</strong></p><p>During this post we are creating images and storing them in Docker Hub. All my images are stored in my <a href=https://hub.docker.com/r/acastellano/archonweb/>ArchonWeb</a> repository. All the scripts used in this post an be found in my <a href=https://github.com/a-castellano/docker>Docker repo</a>.</p><p>First of all we should remove all containers and images in order to maintain our workspace clean.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
+</span></span></code></pre></div><p>Let&rsquo;s create again our container.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND
+</span></span></code></pre></div><p>This command looks nice but&mldr; What all these arguments mean?</p><p><strong>&ndash;name:</strong> The name of the container
 <strong>&ndash;hostname:</strong> The hostname
 <strong>-p:</strong> the port forwarding definition, write as many as you need
-<strong>-i:</strong> the desired image to deploy</p><p>After all these arguments we have to specify which command (with its own arguments) will be executed by our container on start.</p><p><strong>/usr/sbin/apache2ctl -D FOREGROUND</strong></p><p>If we look our container properties we&rsquo;ll see:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker ps -a
-CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS               NAMES
-5f3286af690b        YOUR_USERNAME/archonweb    <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   <span style=color:#ae81ff>12</span> minutes ago      Created                                 ArchonWeb
-</code></pre></div><p>What happens if we don&rsquo;t specify the apache command?</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop ArchonWeb <span style=color:#f92672>&amp;&amp;</span> docker rm ArchonWeb
-docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb
-</code></pre></div><p>Let&rsquo;s see:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker ps -a
-CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS               NAMES
-2250cc8640ae        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/bin/bash&#34;</span>         <span style=color:#ae81ff>2</span> minutes ago       Created                                 ArchonWeb
-</code></pre></div><p>By default our container will execute bash process. As we don&rsquo;t specify any argument or command, apache2 won&rsquo;t be called</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker start ArchonWeb
-docker ps -a
-CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS                  NAMES
-2250cc8640ae        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/bin/bash&#34;</span>         <span style=color:#ae81ff>17</span> seconds ago      Up <span style=color:#ae81ff>9</span> seconds        0.0.0.0:8080-&gt;80/tcp   ArchonWeb
-</code></pre></div><p>We won&rsquo;t see nothing in http://SERVER_IP:8080.</p><p>But what if we want our container to run apache2 by default?</p><p>We need to update our image configuration, to do that we will create a new container with our desired settings. After doing this we will create a new image.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker ps -l
-CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES
-ea13cfe69acf        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   <span style=color:#ae81ff>50</span> seconds ago      Created                                 ArchonWeb
-</code></pre></div><p>There are no ports listed because the container is not in execution.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker commit -m <span style=color:#e6db74>&#34;Added COMMAND&#34;</span> -a <span style=color:#e6db74>&#34;YOUR NAME&#34;</span> ArchonWeb YOUR_USERNAME/archonweb:v2
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker images
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-YOUR_USERNAME/archonweb  v2                  a8870e0efa0a        <span style=color:#ae81ff>44</span> seconds ago      262.4 MB
-YOUR_USERNAME/archonweb  latest              c739c75c3b8e        <span style=color:#ae81ff>2</span> days ago          262.4 MB
-</code></pre></div><p>If you are not signed in our <a href=https://hub.docker.com>Docker Hub</a> account the following step will fail.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker push YOUR_USERNAME/archonweb:v2
-</code></pre></div><p>In our <a href=https://hub.docker.com>Docker Hub</a> account we could see the two tags.</p><p><img src=/images/docker_image_tags01.png alt="My two tags"></p><p>OK, let&rsquo;s test if all would work as we wish. We will delete all the containers and images and we will deploy our archonweb:v2 in a new container.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v2 <span style=color:#f92672>&amp;&amp;</span> docker ps -a
-...
-CONTAINER ID        IMAGE                       COMMAND                  CREATED                  STATUS              PORTS               NAMES
-381681d2078c        YOUR_USERNAME/archonweb:v2  <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   Less than a second ago   Created                                 ArchonWeb
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker inspect ArchonWeb
-<span style=color:#f92672>[</span>
-<span style=color:#f92672>{</span>
-                <span style=color:#e6db74>&#34;Id&#34;</span>: <span style=color:#e6db74>&#34;381681d2078c773ed9ca18db41ae006baa1e15c969cc7769f590f74105d8ff73&#34;</span>,
-                        <span style=color:#e6db74>&#34;Created&#34;</span>: <span style=color:#e6db74>&#34;2016-09-05T19:47:41.793743389Z&#34;</span>,
-                                <span style=color:#e6db74>&#34;Path&#34;</span>: <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>,
-                                <span style=color:#e6db74>&#34;Args&#34;</span>: <span style=color:#f92672>[</span>
-                                            <span style=color:#e6db74>&#34;-D&#34;</span>,
-                                                        <span style=color:#e6db74>&#34;FOREGROUND&#34;</span>
-                                                                
-                                <span style=color:#f92672>]</span>,
-
-<span style=color:#f92672>}</span>
-<span style=color:#f92672>]</span>
-</code></pre></div><p>After starting our docker container we would see our apache default page through port 8080 in our docker host.</p><p><strong>Using Dockerfile to create images</strong></p><p>In this section we are going to use <strong>Dockerfile</strong>. A Dockerfile is a special file which tells docker how to build images. We are going to create again our Archonweb:v2 image using a Dockerfile.</p><p>Clone my <a href=https://github.com/a-castellano/docker>docker repo</a> in our /root/ folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/a-castellano/docker.git
-cd docker/ArchonWeb
-tree
-.
-├── apache2_sites_enabled
-│   ├── 000-default.conf
-│   └── docker.my-site.io.conf
-├── apache2_www
-│   ├── docker.my-site.io
-│   │   └── index.html
-│   └── html
-│       └── default
-│           └── index.html
-├── Dockerfile
-└── README.md
-</code></pre></div><p>There are more files side from the DockerFile, we will use the other later.</p><p>This is our Dockerfile.</p><pre><code>FROM acastellano/archonweb:latest
+<strong>-i:</strong> the desired image to deploy</p><p>After all these arguments we have to specify which command (with its own arguments) will be executed by our container on start.</p><p><strong>/usr/sbin/apache2ctl -D FOREGROUND</strong></p><p>If we look our container properties we&rsquo;ll see:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker ps -a
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS               NAMES
+</span></span><span style=display:flex><span>5f3286af690b        YOUR_USERNAME/archonweb    <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   <span style=color:#ae81ff>12</span> minutes ago      Created                                 ArchonWeb
+</span></span></code></pre></div><p>What happens if we don&rsquo;t specify the apache command?</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop ArchonWeb <span style=color:#f92672>&amp;&amp;</span> docker rm ArchonWeb
+</span></span><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb
+</span></span></code></pre></div><p>Let&rsquo;s see:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker ps -a
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS               NAMES
+</span></span><span style=display:flex><span>2250cc8640ae        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/bin/bash&#34;</span>         <span style=color:#ae81ff>2</span> minutes ago       Created                                 ArchonWeb
+</span></span></code></pre></div><p>By default our container will execute bash process. As we don&rsquo;t specify any argument or command, apache2 won&rsquo;t be called</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker start ArchonWeb
+</span></span><span style=display:flex><span>docker ps -a
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS                  NAMES
+</span></span><span style=display:flex><span>2250cc8640ae        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/bin/bash&#34;</span>         <span style=color:#ae81ff>17</span> seconds ago      Up <span style=color:#ae81ff>9</span> seconds        0.0.0.0:8080-&gt;80/tcp   ArchonWeb
+</span></span></code></pre></div><p>We won&rsquo;t see nothing in http://SERVER_IP:8080.</p><p>But what if we want our container to run apache2 by default?</p><p>We need to update our image configuration, to do that we will create a new container with our desired settings. After doing this we will create a new image.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb /usr/sbin/apache2ctl -D FOREGROUND
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker ps -l
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES
+</span></span><span style=display:flex><span>ea13cfe69acf        YOUR_USERNAME/archonweb <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   <span style=color:#ae81ff>50</span> seconds ago      Created                                 ArchonWeb
+</span></span></code></pre></div><p>There are no ports listed because the container is not in execution.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker commit -m <span style=color:#e6db74>&#34;Added COMMAND&#34;</span> -a <span style=color:#e6db74>&#34;YOUR NAME&#34;</span> ArchonWeb YOUR_USERNAME/archonweb:v2
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker images
+</span></span><span style=display:flex><span>REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span style=display:flex><span>YOUR_USERNAME/archonweb  v2                  a8870e0efa0a        <span style=color:#ae81ff>44</span> seconds ago      262.4 MB
+</span></span><span style=display:flex><span>YOUR_USERNAME/archonweb  latest              c739c75c3b8e        <span style=color:#ae81ff>2</span> days ago          262.4 MB
+</span></span></code></pre></div><p>If you are not signed in our <a href=https://hub.docker.com>Docker Hub</a> account the following step will fail.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker push YOUR_USERNAME/archonweb:v2
+</span></span></code></pre></div><p>In our <a href=https://hub.docker.com>Docker Hub</a> account we could see the two tags.</p><p><img src=/images/docker_image_tags01.png alt="My two tags"></p><p>OK, let&rsquo;s test if all would work as we wish. We will delete all the containers and images and we will deploy our archonweb:v2 in a new container.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v2 <span style=color:#f92672>&amp;&amp;</span> docker ps -a
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                       COMMAND                  CREATED                  STATUS              PORTS               NAMES
+</span></span><span style=display:flex><span>381681d2078c        YOUR_USERNAME/archonweb:v2  <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>   Less than a second ago   Created                                 ArchonWeb
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker inspect ArchonWeb
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;Id&#34;</span>: <span style=color:#e6db74>&#34;381681d2078c773ed9ca18db41ae006baa1e15c969cc7769f590f74105d8ff73&#34;</span>,
+</span></span><span style=display:flex><span>                        <span style=color:#e6db74>&#34;Created&#34;</span>: <span style=color:#e6db74>&#34;2016-09-05T19:47:41.793743389Z&#34;</span>,
+</span></span><span style=display:flex><span>                                <span style=color:#e6db74>&#34;Path&#34;</span>: <span style=color:#e6db74>&#34;/usr/sbin/apache2ctl&#34;</span>,
+</span></span><span style=display:flex><span>                                <span style=color:#e6db74>&#34;Args&#34;</span>: <span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>                                            <span style=color:#e6db74>&#34;-D&#34;</span>,
+</span></span><span style=display:flex><span>                                                        <span style=color:#e6db74>&#34;FOREGROUND&#34;</span>
+</span></span><span style=display:flex><span>                                                                
+</span></span><span style=display:flex><span>                                <span style=color:#f92672>]</span>,
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>After starting our docker container we would see our apache default page through port 8080 in our docker host.</p><p><strong>Using Dockerfile to create images</strong></p><p>In this section we are going to use <strong>Dockerfile</strong>. A Dockerfile is a special file which tells docker how to build images. We are going to create again our Archonweb:v2 image using a Dockerfile.</p><p>Clone my <a href=https://github.com/a-castellano/docker>docker repo</a> in our /root/ folder.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/a-castellano/docker.git
+</span></span><span style=display:flex><span>cd docker/ArchonWeb
+</span></span><span style=display:flex><span>tree
+</span></span><span style=display:flex><span>.
+</span></span><span style=display:flex><span>├── apache2_sites_enabled
+</span></span><span style=display:flex><span>│   ├── 000-default.conf
+</span></span><span style=display:flex><span>│   └── docker.my-site.io.conf
+</span></span><span style=display:flex><span>├── apache2_www
+</span></span><span style=display:flex><span>│   ├── docker.my-site.io
+</span></span><span style=display:flex><span>│   │   └── index.html
+</span></span><span style=display:flex><span>│   └── html
+</span></span><span style=display:flex><span>│       └── default
+</span></span><span style=display:flex><span>│           └── index.html
+</span></span><span style=display:flex><span>├── Dockerfile
+</span></span><span style=display:flex><span>└── README.md
+</span></span></code></pre></div><p>There are more files side from the DockerFile, we will use the other later.</p><p>This is our Dockerfile.</p><pre tabindex=0><code>FROM acastellano/archonweb:latest
 MAINTAINER Álvaro Castellano Vela &lt;alvaro.castellano.vela@gmail.com&gt;
 RUN apt-get update -y
 RUN apt-get upgrade -y
 EXPOSE 80
-CMD [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
-</code></pre><p>This Docker file will create a new image <strong>FROM</strong> our archonweb:latest current image, it will update our packages (using <strong>RUN</strong> Docker will execute commands inside our image). The Dockerfile defines the open ports that will be open too. Finally, tt sets the image command for starting apache2 when the container starts.</p><p>Build the image form using Dockerfile</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker build -t YOUR_USERNAME/archonweb:v2 .
-docker images
-REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-YOUR_USERNAME/archonweb  v2                  6c732b5bae3d        <span style=color:#ae81ff>45</span> seconds ago      276.4 MB
-acastellano/archonweb    latest              c739c75c3b8e        <span style=color:#ae81ff>12</span> days ago         262.4 MB
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v2
-</code></pre></div><p>If we start our new ArchonWeb container it will work in the same way as before.</p><p>As we did before we can commit the image:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker commit -m <span style=color:#e6db74>&#34;Image created using a Dockerfile&#34;</span> -a <span style=color:#e6db74>&#34;YOUR NAME&#34;</span> ArchonWeb YOUR_USERNAME/archonweb:v2
-</code></pre></div><p><strong>Using volumes</strong></p><p>So, we have a web server without content. Next step would be create a website or webapp but there is a little problem. If we enter inside our container and we try to update our index.html we will realize that this contaner doesn&rsquo;t have any text editor!</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker exec -i -t ArchonWeb /bin/bash
-vi /var/www/html/index.html
-bash: vi: command not found
-
-nano /var/www/html/index.html
-bash: nano: command not found
-</code></pre></div><p>Why we don&rsquo;t have any editor? Don&rsquo;t lose your mind!</p><p>Docker images should be as small as possible so it would be reasonable to have only essential packages installed. So please, don&rsquo;t install text editors or other tools that are not necessary for the main purpose of the image.</p><p>We are going to use volumes. A volume is a local directory which is mounted in our container, so we can edit files that the container can see. When we mount a volume in existing location it will be overwritten.</p><p>Inside our repository there are two folders: <strong>apache2_sites_enabled</strong> will be mounted in <strong>/etc/apache2/sites-enabled</strong> and <strong>apache2_www</strong> will be mounted in <strong>/var/www</strong>.</p><p>For doing this we will use the <strong>-v</strong> option which allows us to attach volumes.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8081:80 -v apache2_www:/var/www -v apache2_sites_enabled:/etc/apache2/sites-enabled -i YOUR_USERNAME/archonweb:v2
-</code></pre></div><p>This might not work, ensure that we are in the folder ArchonWeb which is inside of the docker root folder.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>echo $PWD
-/root/docker/ArchonWeb
-</code></pre></div><p>We have to use absolute paths.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8081:80 -v $PWD/apache2_www:/var/www -v $PWD/apache2_sites_enabled:/etc/apache2/sites-enabled -i YOUR_USERNAME/archonweb:v2
-docker start ArchonWebVolumes
-</code></pre></div><p>Now it is working, our default site has changed. If we could see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8081 congratulations! We did it!
-In the same way, if we point docker.my-site.io to our SERVER_IP we could see a default web template in <a href=http://docker.my-site.io>http://docker.my-site.io</a>:8081</p><p><img src=/images/archonwebv2_default_website.png alt="Our new default website">
-<img src=/images/docker-my-site-io.png alt="Our docker website"></p><p>Of course, as we modify our default index it will change without doing anything more.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vim $PWD/apache2_www/html/default/index.html
-</code></pre></div><p><img src=/images/something-for-now.png alt="Making changes"></p><p><strong>Using Dockerfile for attaching volumes</strong></p><p>Using a Dockerfile we can go further and write instructions to attach volumes. Inside the docker repository there is another folder called ArchonWebVolumes.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cd ~/docker/ArchonWebVolumes
-</code></pre></div><p>Here is our DockerFile:</p><pre><code>FROM acastellano/archonweb:v2
+CMD [&#34;/usr/sbin/apache2ctl&#34;, &#34;-D&#34;, &#34;FOREGROUND&#34;]
+</code></pre><p>This Docker file will create a new image <strong>FROM</strong> our archonweb:latest current image, it will update our packages (using <strong>RUN</strong> Docker will execute commands inside our image). The Dockerfile defines the open ports that will be open too. Finally, tt sets the image command for starting apache2 when the container starts.</p><p>Build the image form using Dockerfile</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker build -t YOUR_USERNAME/archonweb:v2 .
+</span></span><span style=display:flex><span>docker images
+</span></span><span style=display:flex><span>REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span style=display:flex><span>YOUR_USERNAME/archonweb  v2                  6c732b5bae3d        <span style=color:#ae81ff>45</span> seconds ago      276.4 MB
+</span></span><span style=display:flex><span>acastellano/archonweb    latest              c739c75c3b8e        <span style=color:#ae81ff>12</span> days ago         262.4 MB
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v2
+</span></span></code></pre></div><p>If we start our new ArchonWeb container it will work in the same way as before.</p><p>As we did before we can commit the image:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker commit -m <span style=color:#e6db74>&#34;Image created using a Dockerfile&#34;</span> -a <span style=color:#e6db74>&#34;YOUR NAME&#34;</span> ArchonWeb YOUR_USERNAME/archonweb:v2
+</span></span></code></pre></div><p><strong>Using volumes</strong></p><p>So, we have a web server without content. Next step would be create a website or webapp but there is a little problem. If we enter inside our container and we try to update our index.html we will realize that this contaner doesn&rsquo;t have any text editor!</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker exec -i -t ArchonWeb /bin/bash
+</span></span><span style=display:flex><span>vi /var/www/html/index.html
+</span></span><span style=display:flex><span>bash: vi: command not found
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nano /var/www/html/index.html
+</span></span><span style=display:flex><span>bash: nano: command not found
+</span></span></code></pre></div><p>Why we don&rsquo;t have any editor? Don&rsquo;t lose your mind!</p><p>Docker images should be as small as possible so it would be reasonable to have only essential packages installed. So please, don&rsquo;t install text editors or other tools that are not necessary for the main purpose of the image.</p><p>We are going to use volumes. A volume is a local directory which is mounted in our container, so we can edit files that the container can see. When we mount a volume in existing location it will be overwritten.</p><p>Inside our repository there are two folders: <strong>apache2_sites_enabled</strong> will be mounted in <strong>/etc/apache2/sites-enabled</strong> and <strong>apache2_www</strong> will be mounted in <strong>/var/www</strong>.</p><p>For doing this we will use the <strong>-v</strong> option which allows us to attach volumes.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8081:80 -v apache2_www:/var/www -v apache2_sites_enabled:/etc/apache2/sites-enabled -i YOUR_USERNAME/archonweb:v2
+</span></span></code></pre></div><p>This might not work, ensure that we are in the folder ArchonWeb which is inside of the docker root folder.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>echo $PWD
+</span></span><span style=display:flex><span>/root/docker/ArchonWeb
+</span></span></code></pre></div><p>We have to use absolute paths.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8081:80 -v $PWD/apache2_www:/var/www -v $PWD/apache2_sites_enabled:/etc/apache2/sites-enabled -i YOUR_USERNAME/archonweb:v2
+</span></span><span style=display:flex><span>docker start ArchonWebVolumes
+</span></span></code></pre></div><p>Now it is working, our default site has changed. If we could see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8081 congratulations! We did it!
+In the same way, if we point docker.my-site.io to our SERVER_IP we could see a default web template in <a href=http://docker.my-site.io:8081>http://docker.my-site.io:8081</a></p><p><img src=/images/archonwebv2_default_website.png alt="Our new default website">
+<img src=/images/docker-my-site-io.png alt="Our docker website"></p><p>Of course, as we modify our default index it will change without doing anything more.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vim $PWD/apache2_www/html/default/index.html
+</span></span></code></pre></div><p><img src=/images/something-for-now.png alt="Making changes"></p><p><strong>Using Dockerfile for attaching volumes</strong></p><p>Using a Dockerfile we can go further and write instructions to attach volumes. Inside the docker repository there is another folder called ArchonWebVolumes.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd ~/docker/ArchonWebVolumes
+</span></span></code></pre></div><p>Here is our DockerFile:</p><pre tabindex=0><code>FROM acastellano/archonweb:v2
 MAINTAINER Álvaro Castellano Vela &lt;alvaro.castellano.vela@gmail.com&gt;
 EXPOSE 80
 VOLUME /etc/apache2/sites-enabled
@@ -103,55 +109,55 @@ VOLUME /var/www
 ADD apache2_sites_enabled /etc/apache2/sites-enabled
 ADD apache2_www /var/www
 RUN apt-get update -y &amp;&amp; apt-get upgrade -y
-ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
-</code></pre><p>In this file there are two new commands: using <strong>VOLUME</strong> we are defining which path will be a volume. Using <strong>ADD</strong> we define volume relationships as we did using <strong>-v</strong> command. Let&rsquo;s build the new image.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker build -t archonwebvolumes .
-</code></pre></div><p>Now we create a new container using the new image:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker create  --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8082:80 -i archonwebvolumes
-docker start ArchonWebVolumes
-</code></pre></div><p>We will see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8082. As we did before we can modify the files inside the volumes.</p><p>Now imagine that inside <em>apache2_www</em> we have some ultra marvelous app, after finishing its development we want to create a new docker image containing our release version which is inside.</p><p>Let&rsquo;s create another image with the release version of our app inside.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
-cd ~/docker/ArchonWeb
-docker build -t YOUR_USERNAME/archonweb:release .
-docker create  --name ArchonWebRelease --hostname ArchonWebRelease -p 8080:80 -i YOUR_USERNAME/archonweb:release
-</code></pre></div><p>The container is ready, now it&rsquo;s time to copy our release version. For coping files inside our container we need to use <strong>docker cp</strong>. It is not necessary to start the container for copying files inside it.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker cp ../ArchonWebVolumes/sites-enabled ArchonWebRelease:/etc/apache2/
-docker cp ../ArchonWebVolumes/www ArchonWebRelease:/var/
-docker start ArchonWebRelease
-</code></pre></div><p>If we could see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8080 we did it. Let&rsquo;s commit our image.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker commit -m <span style=color:#e6db74>&#34;Release&#34;</span> -a <span style=color:#e6db74>&#34;YOUR_NAME&#34;</span> ArchonWebRelease  YOUR_USERNAME/archonweb:release
-docker push YOUR_USERNAME/archonweb:release
-</code></pre></div><p><strong>Docker compose</strong></p><p>In the last part of this post we are going to create two containers. First container will be a new version of our ArchonWeb container. Second container will be a database server, we will use MariaDB. Instead of creating our own docker image we will use the public MariaDB public image.</p><p>Our new ArchonWeb app needs to connect to a database so we need to establish a connection between our two containers. We could create the containers and use docker for configuring a new network and connect our containers to it but there is another way to do it.</p><p>It is possible to automatize this process using <a href=https://docs.docker.com/compose/#/docker-compose>Docker Compose</a>.</p><p>According with Docker docs, Compose is a tool for defining and running multi-container Docker applications. We will use Compose for creating our new service.</p><p>Our first step will be setting up our new version of ArchonWeb.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cd ~/docker/Composer_Archonweb_Mariadb
-tree .
-.
-├── archonweb
-│   ├── apache2_sites_enabled
-│   │   └── 000-default.conf
-│   ├── apache2_www
-│   │   └── default
-│   │       └── index.php
-│   └── docker-entrypoint.sh
-├── DockerCloudStackfile.yml
-├── docker-compose.yml
-└── Dockerfile
-
-<span style=color:#ae81ff>4</span> directories, <span style=color:#ae81ff>6</span> files
-</code></pre></div><p>This is our web app:
-<strong>Composer_Archonweb_Index.php</strong></p><pre><code>&lt;html&gt;
+ENTRYPOINT [&#34;/usr/sbin/apache2ctl&#34;, &#34;-D&#34;, &#34;FOREGROUND&#34;]
+</code></pre><p>In this file there are two new commands: using <strong>VOLUME</strong> we are defining which path will be a volume. Using <strong>ADD</strong> we define volume relationships as we did using <strong>-v</strong> command. Let&rsquo;s build the new image.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker build -t archonwebvolumes .
+</span></span></code></pre></div><p>Now we create a new container using the new image:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker create  --name ArchonWebVolumes --hostname ArchonWebVolumes -p 8082:80 -i archonwebvolumes
+</span></span><span style=display:flex><span>docker start ArchonWebVolumes
+</span></span></code></pre></div><p>We will see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8082. As we did before we can modify the files inside the volumes.</p><p>Now imagine that inside <em>apache2_www</em> we have some ultra marvelous app, after finishing its development we want to create a new docker image containing our release version which is inside.</p><p>Let&rsquo;s create another image with the release version of our app inside.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>cd ~/docker/ArchonWeb
+</span></span><span style=display:flex><span>docker build -t YOUR_USERNAME/archonweb:release .
+</span></span><span style=display:flex><span>docker create  --name ArchonWebRelease --hostname ArchonWebRelease -p 8080:80 -i YOUR_USERNAME/archonweb:release
+</span></span></code></pre></div><p>The container is ready, now it&rsquo;s time to copy our release version. For coping files inside our container we need to use <strong>docker cp</strong>. It is not necessary to start the container for copying files inside it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker cp ../ArchonWebVolumes/sites-enabled ArchonWebRelease:/etc/apache2/
+</span></span><span style=display:flex><span>docker cp ../ArchonWebVolumes/www ArchonWebRelease:/var/
+</span></span><span style=display:flex><span>docker start ArchonWebRelease
+</span></span></code></pre></div><p>If we could see &ldquo;Nothing for now&rdquo; in http://SERVER_IP:8080 we did it. Let&rsquo;s commit our image.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker commit -m <span style=color:#e6db74>&#34;Release&#34;</span> -a <span style=color:#e6db74>&#34;YOUR_NAME&#34;</span> ArchonWebRelease  YOUR_USERNAME/archonweb:release
+</span></span><span style=display:flex><span>docker push YOUR_USERNAME/archonweb:release
+</span></span></code></pre></div><p><strong>Docker compose</strong></p><p>In the last part of this post we are going to create two containers. First container will be a new version of our ArchonWeb container. Second container will be a database server, we will use MariaDB. Instead of creating our own docker image we will use the public MariaDB public image.</p><p>Our new ArchonWeb app needs to connect to a database so we need to establish a connection between our two containers. We could create the containers and use docker for configuring a new network and connect our containers to it but there is another way to do it.</p><p>It is possible to automatize this process using <a href=https://docs.docker.com/compose/#/docker-compose>Docker Compose</a>.</p><p>According with Docker docs, Compose is a tool for defining and running multi-container Docker applications. We will use Compose for creating our new service.</p><p>Our first step will be setting up our new version of ArchonWeb.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd ~/docker/Composer_Archonweb_Mariadb
+</span></span><span style=display:flex><span>tree .
+</span></span><span style=display:flex><span>.
+</span></span><span style=display:flex><span>├── archonweb
+</span></span><span style=display:flex><span>│   ├── apache2_sites_enabled
+</span></span><span style=display:flex><span>│   │   └── 000-default.conf
+</span></span><span style=display:flex><span>│   ├── apache2_www
+</span></span><span style=display:flex><span>│   │   └── default
+</span></span><span style=display:flex><span>│   │       └── index.php
+</span></span><span style=display:flex><span>│   └── docker-entrypoint.sh
+</span></span><span style=display:flex><span>├── DockerCloudStackfile.yml
+</span></span><span style=display:flex><span>├── docker-compose.yml
+</span></span><span style=display:flex><span>└── Dockerfile
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span> directories, <span style=color:#ae81ff>6</span> files
+</span></span></code></pre></div><p>This is our web app:
+<strong>Composer_Archonweb_Index.php</strong></p><pre tabindex=0><code>&lt;html&gt;
 	&lt;head&gt;
 		&lt;title&gt;Archon Web&lt;/title&gt;
 	&lt;/head&gt;
 	&lt;body&gt;
-		&lt;h1&gt;&lt;?php echo &quot;ArchonWeb&quot; ?&gt;&lt;/h1&gt;
+		&lt;h1&gt;&lt;?php echo &#34;ArchonWeb&#34; ?&gt;&lt;/h1&gt;
 
 		&lt;?php 
-			$dbname = '##MYSQL_DATABASE##';
-			$dbuser = '##MYSQL_USER##';
-			$dbpass = '##MYSQL_PASSWORD##';
-			$dbhost = '##MYSQL_HOST##';
+			$dbname = &#39;##MYSQL_DATABASE##&#39;;
+			$dbuser = &#39;##MYSQL_USER##&#39;;
+			$dbpass = &#39;##MYSQL_PASSWORD##&#39;;
+			$dbhost = &#39;##MYSQL_HOST##&#39;;
 
-			$connect = mysql_connect($dbhost, $dbuser, $dbpass) or die(&quot;Unable to Connect to '$dbhost'&quot;);
+			$connect = mysql_connect($dbhost, $dbuser, $dbpass) or die(&#34;Unable to Connect to &#39;$dbhost&#39;&#34;);
 			
-			mysql_select_db($dbname) or die(&quot;Could not open the db '$dbname'&quot;);
+			mysql_select_db($dbname) or die(&#34;Could not open the db &#39;$dbname&#39;&#34;);
 
-			$test_query = &quot;SHOW TABLES FROM $dbname&quot;;
+			$test_query = &#34;SHOW TABLES FROM $dbname&#34;;
 
 			$result = mysql_query($test_query);
 
@@ -162,68 +168,68 @@ tree .
 			}
 
 			if (!$tblCnt) {
-				echo &quot;There are no tables&lt;br /&gt;\n&quot;;
+				echo &#34;There are no tables&lt;br /&gt;\n&#34;;
 			} else {
-				echo &quot;There are $tblCnt tables&lt;br /&gt;\n&quot;;
+				echo &#34;There are $tblCnt tables&lt;br /&gt;\n&#34;;
 			}
 
 		?&gt;
 
 	&lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>This app only counts how many tables are in our &ldquo;##MYSQL_DATABASE##". The database values use ##&lsquo;s strings because our container will set these values on start. How it will do it?</p><p>Our new ArchonWeb will execute this script on start, let&rsquo;s see what it does:</p><pre><code>#!/bin/bash
+</code></pre><p>This app only counts how many tables are in our &ldquo;##MYSQL_DATABASE##&rdquo;. The database values use ##&rsquo;s strings because our container will set these values on start. How it will do it?</p><p>Our new ArchonWeb will execute this script on start, let&rsquo;s see what it does:</p><pre tabindex=0><code>#!/bin/bash
 set -eo pipefail
 shopt -s nullglob
 
 if [ -z ${MYSQL_DATABASE} ]; then
-    echo &quot;You need to specify MYSQL_DATABASE&quot;
+    echo &#34;You need to specify MYSQL_DATABASE&#34;
     exit 1
 fi
 
 if [ -z ${MYSQL_USER} ]; then
-    echo &quot;You need to specify MYSQL_USER&quot;
+    echo &#34;You need to specify MYSQL_USER&#34;
     exit 1
 fi
 
 if [ -z ${MYSQL_PASSWORD} ]; then
-    echo &quot;You need to specify MYSQL_PASSWORD&quot;
+    echo &#34;You need to specify MYSQL_PASSWORD&#34;
     exit 1
 fi
 
 if [ -z ${MYSQL_HOST} ]; then
-    echo &quot;You need to specify DB_HOST&quot;
+    echo &#34;You need to specify DB_HOST&#34;
     exit 1
 fi
 
-sed -i -e &quot;s/##MYSQL_DATABASE##/$MYSQL_DATABASE/g&quot; /var/www/default/index.php
-sed -i -e &quot;s/##MYSQL_USER##/$MYSQL_USER/g&quot; /var/www/default/index.php
-sed -i -e &quot;s/##MYSQL_PASSWORD##/$MYSQL_PASSWORD/g&quot; /var/www/default/index.php
-sed -i -e &quot;s/##MYSQL_HOST##/$MYSQL_HOST/g&quot; /var/www/default/index.php
+sed -i -e &#34;s/##MYSQL_DATABASE##/$MYSQL_DATABASE/g&#34; /var/www/default/index.php
+sed -i -e &#34;s/##MYSQL_USER##/$MYSQL_USER/g&#34; /var/www/default/index.php
+sed -i -e &#34;s/##MYSQL_PASSWORD##/$MYSQL_PASSWORD/g&#34; /var/www/default/index.php
+sed -i -e &#34;s/##MYSQL_HOST##/$MYSQL_HOST/g&#34; /var/www/default/index.php
 
 /usr/sbin/apache2ctl -D FOREGROUND
-</code></pre><p>When the container starts, this script checks if the required environment variables are set, after that it will modify the index.php and it will run apache2 web server.</p><p>All these files need to be copied inside our container, we will do it after creating our ArchonWeb image.</p><p>For this new version our Dockerfile is very simple.</p><pre><code>FROM acastellano/archonweb:v2
+</code></pre><p>When the container starts, this script checks if the required environment variables are set, after that it will modify the index.php and it will run apache2 web server.</p><p>All these files need to be copied inside our container, we will do it after creating our ArchonWeb image.</p><p>For this new version our Dockerfile is very simple.</p><pre tabindex=0><code>FROM acastellano/archonweb:v2
 MAINTAINER Álvaro Castellano Vela &lt;alvaro.castellano.vela@gmail.com&gt;
 EXPOSE 80
-</code></pre><p>Let&rsquo;s create the image and the container.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
-cd ~/docker/Composer_Archonweb_Mariadb
-docker build -t YOUR_USERNAME/archonweb:v3 .
-docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v3
-</code></pre></div><p>Now, let&rsquo;s copy the web app and the startup script.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cd ~/docker/Composer_Archonweb_Mariadb/archonweb
-docker cp apache2_sites_enabled/000-default.conf ArchonWeb:/etc/apache2/sites-enabled/
-docker cp apache2_www/default ArchonWeb:/var/www/
-docker cp docker-entrypoint.sh ArchonWeb:/
-docker commit -m <span style=color:#e6db74>&#34;Added index.php and docker-entrypoint.sh&#34;</span> -a <span style=color:#e6db74>&#34;Your Name&#34;</span> ArchonWeb  YOUR_USERNAME/archonweb:v3
-docker push YOUR_USERNAME/archonweb:v3
-</code></pre></div><p>If we start our container it won&rsquo;t work because there are no databases and our app is not configured.
-<img src=/images/archonwebv3_index_not_configured.png alt="Our app is not configured"></p><p>The required ArchonWeb version is ready. Now is time to deploy our new application. This is our Docker Compose script:</p><pre><code>version: '2'
+</code></pre><p>Let&rsquo;s create the image and the container.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>cd ~/docker/Composer_Archonweb_Mariadb
+</span></span><span style=display:flex><span>docker build -t YOUR_USERNAME/archonweb:v3 .
+</span></span><span style=display:flex><span>docker create --name ArchonWeb --hostname ArchonWeb -p 8080:80 -i YOUR_USERNAME/archonweb:v3
+</span></span></code></pre></div><p>Now, let&rsquo;s copy the web app and the startup script.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd ~/docker/Composer_Archonweb_Mariadb/archonweb
+</span></span><span style=display:flex><span>docker cp apache2_sites_enabled/000-default.conf ArchonWeb:/etc/apache2/sites-enabled/
+</span></span><span style=display:flex><span>docker cp apache2_www/default ArchonWeb:/var/www/
+</span></span><span style=display:flex><span>docker cp docker-entrypoint.sh ArchonWeb:/
+</span></span><span style=display:flex><span>docker commit -m <span style=color:#e6db74>&#34;Added index.php and docker-entrypoint.sh&#34;</span> -a <span style=color:#e6db74>&#34;Your Name&#34;</span> ArchonWeb  YOUR_USERNAME/archonweb:v3
+</span></span><span style=display:flex><span>docker push YOUR_USERNAME/archonweb:v3
+</span></span></code></pre></div><p>If we start our container it won&rsquo;t work because there are no databases and our app is not configured.
+<img src=/images/archonwebv3_index_not_configured.png alt="Our app is not configured"></p><p>The required ArchonWeb version is ready. Now is time to deploy our new application. This is our Docker Compose script:</p><pre tabindex=0><code>version: &#39;2&#39;
 services:
     db:
         container_name: db
         image: mariadb:latest
         volumes:
-         - &quot;./.data/db:/var/lib/mysql&quot;
+         - &#34;./.data/db:/var/lib/mysql&#34;
         restart: always
         environment:
           MYSQL_ROOT_PASSWORD: toor
@@ -240,42 +246,42 @@ services:
         links: 
           - db
         ports:
-          - &quot;8080:80&quot;
+          - &#34;8080:80&#34;
         restart: always
         environment:
           MYSQL_DATABASE: archondb
           MYSQL_USER: archon
           MYSQL_PASSWORD: password
           MYSQL_HOST: db
-</code></pre><p>This script defines two services: <strong>db</strong> and <strong>ArchobWeb</strong>. Each service needs a image to be deployed. Also, <strong>db</strong> container mounts a volume where our database will be stored, it won&rsquo;t be secure if our database is stored publically. If we commit our db image it won&rsquo;t contain private data.</p><p>For each service the script defines <strong>environment</strong> variables which will be used to configure the containers.</p><p>The <strong>command</strong> defines which script will be executed on start.</p><p>In the <strong>ArchonWeb</strong> section is defined a dependency with the <strong>db</strong> container, it won&rsquo;t be created until <strong>db</strong> exists. Both container will be in the same network, with the &ldquo;<strong>link</strong>&rdquo; action we can reach <strong>db</strong> from ArchonWeb, it is not necesaary to use <strong>db</strong> IP address, we can reach it only using &ldquo;db&rdquo; name.</p><p>Let&rsquo;s clean all the containers and images again and launch our docker service.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
-docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
-cd ~/docker/Composer_Archonweb_Mariadb
-docker-compose up -d
-docker ps -a
-CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS                  PORTS                  NAMES
-235efc8c9083        acastellano/archonweb:v3   <span style=color:#e6db74>&#34;/docker-entrypoint.s&#34;</span>   <span style=color:#ae81ff>1</span> seconds ago       Up Less than a second   0.0.0.0:8080-&gt;80/tcp   ArchonWeb
-fbb272c61a73        mariadb:latest             <span style=color:#e6db74>&#34;docker-entrypoint.sh&#34;</span>   <span style=color:#ae81ff>1</span> seconds ago       Up Less than a second   3306/tcp               db
-</code></pre></div><p>If our app works we could see something like this in http://SERVER_IP:8080.</p><p><img src=/images/archonwebv3_working.png alt="Our app is working!"></p><p>Let&rsquo;s explore our container.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker exec -i -t ArchonWeb /bin/bash
-cat /var/www/default/index.php
-</code></pre></div><p>Our app file has changed according with the environment variables.</p><pre><code>&lt;html&gt;
+</code></pre><p>This script defines two services: <strong>db</strong> and <strong>ArchobWeb</strong>. Each service needs a image to be deployed. Also, <strong>db</strong> container mounts a volume where our database will be stored, it won&rsquo;t be secure if our database is stored publically. If we commit our db image it won&rsquo;t contain private data.</p><p>For each service the script defines <strong>environment</strong> variables which will be used to configure the containers.</p><p>The <strong>command</strong> defines which script will be executed on start.</p><p>In the <strong>ArchonWeb</strong> section is defined a dependency with the <strong>db</strong> container, it won&rsquo;t be created until <strong>db</strong> exists. Both container will be in the same network, with the &ldquo;<strong>link</strong>&rdquo; action we can reach <strong>db</strong> from ArchonWeb, it is not necesaary to use <strong>db</strong> IP address, we can reach it only using &ldquo;db&rdquo; name.</p><p>Let&rsquo;s clean all the containers and images again and launch our docker service.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker stop <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rm <span style=color:#66d9ef>$(</span>docker ps -a -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>docker rmi <span style=color:#66d9ef>$(</span>docker images -q<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>cd ~/docker/Composer_Archonweb_Mariadb
+</span></span><span style=display:flex><span>docker-compose up -d
+</span></span><span style=display:flex><span>docker ps -a
+</span></span><span style=display:flex><span>CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS                  PORTS                  NAMES
+</span></span><span style=display:flex><span>235efc8c9083        acastellano/archonweb:v3   <span style=color:#e6db74>&#34;/docker-entrypoint.s&#34;</span>   <span style=color:#ae81ff>1</span> seconds ago       Up Less than a second   0.0.0.0:8080-&gt;80/tcp   ArchonWeb
+</span></span><span style=display:flex><span>fbb272c61a73        mariadb:latest             <span style=color:#e6db74>&#34;docker-entrypoint.sh&#34;</span>   <span style=color:#ae81ff>1</span> seconds ago       Up Less than a second   3306/tcp               db
+</span></span></code></pre></div><p>If our app works we could see something like this in http://SERVER_IP:8080.</p><p><img src=/images/archonwebv3_working.png alt="Our app is working!"></p><p>Let&rsquo;s explore our container.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker exec -i -t ArchonWeb /bin/bash
+</span></span><span style=display:flex><span>cat /var/www/default/index.php
+</span></span></code></pre></div><p>Our app file has changed according with the environment variables.</p><pre tabindex=0><code>&lt;html&gt;
 	&lt;head&gt;
 		&lt;title&gt;Archon Web&lt;/title&gt;
 	&lt;/head&gt;
 	&lt;body&gt;
-		&lt;h1&gt;&lt;?php echo &quot;ArchonWeb&quot; ?&gt;&lt;/h1&gt;
+		&lt;h1&gt;&lt;?php echo &#34;ArchonWeb&#34; ?&gt;&lt;/h1&gt;
 
 		&lt;?php
-			$dbname = 'archondb';
-			$dbuser = 'archon';
-			$dbpass = 'password';
-			$dbhost = 'db';
+			$dbname = &#39;archondb&#39;;
+			$dbuser = &#39;archon&#39;;
+			$dbpass = &#39;password&#39;;
+			$dbhost = &#39;db&#39;;
 
-			$connect = mysql_connect($dbhost, $dbuser, $dbpass) or die(&quot;Unable to Connect to '$dbhost'&quot;);
+			$connect = mysql_connect($dbhost, $dbuser, $dbpass) or die(&#34;Unable to Connect to &#39;$dbhost&#39;&#34;);
 
-			mysql_select_db($dbname) or die(&quot;Could not open the db '$dbname'&quot;);
+			mysql_select_db($dbname) or die(&#34;Could not open the db &#39;$dbname&#39;&#34;);
 
-			$test_query = &quot;SHOW TABLES FROM $dbname&quot;;
+			$test_query = &#34;SHOW TABLES FROM $dbname&#34;;
 
 			$result = mysql_query($test_query);
 
@@ -286,16 +292,16 @@ cat /var/www/default/index.php
 			}
 
 			if (!$tblCnt) {
-				echo &quot;There are no tables&lt;br /&gt;\n&quot;;
+				echo &#34;There are no tables&lt;br /&gt;\n&#34;;
 			} else {
-				echo &quot;There are $tblCnt tables&lt;br /&gt;\n&quot;;
+				echo &#34;There are $tblCnt tables&lt;br /&gt;\n&#34;;
 			}
 
 		?&gt;
 
 	&lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>Let&rsquo;s test if our app is working creating some tables.</p><p>Inside Archonweb:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mysql -uarchon -ppassword -hdb archondb
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>MariaDB <span style=color:#f92672>[</span>archondb<span style=color:#f92672>]</span>&gt; CREATE TABLE example <span style=color:#f92672>(</span> id INT, data VARCHAR<span style=color:#f92672>(</span>100<span style=color:#f92672>)</span> <span style=color:#f92672>)</span>;
-MariaDB <span style=color:#f92672>[</span>archondb<span style=color:#f92672>]</span>&gt; CREATE TABLE example <span style=color:#f92672>(</span> id INT, data VARCHAR<span style=color:#f92672>(</span>100<span style=color:#f92672>)</span> <span style=color:#f92672>)</span>;
-</code></pre></div><p>After creating two tables we will see this in http://SERVER_IP:8080:</p><p><img src=/images/archonwebv3_two_tables.png alt="Two tables"></p><p>This is it so far folks!</p><p>I&rsquo;m learning new things about Docker and I will write about it soon. Stay tuned.</p></article></div></div></div></div></main></div></div><div class="footer container-lg width-full p-responsive" role=contentinfo><div class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"><ul class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0"><li class="mr-3 mr-lg-0"></a></li></ul><a aria-label=Homepage title="Álvaro Castellano - Personal Blog" class="footer-octicon d-none d-lg-block mx-lg-4" href=https://a-castellano.github.io/><svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" width="24" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.013 8.013.0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><ul class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0"></ul></div><div class="d-flex flex-justify-center pb-6"><span class="f6 text-gray-light"></span></div></div><script crossorigin=anonymous type=application/javascript src=https://a-castellano.github.io/js/frameworks.js></script><script crossorigin=anonymous type=application/javascript src=https://a-castellano.github.io/js/github-bootstrap.js></script><script src=https://a-castellano.github.io/js/stop.js></script><script src=https://a-castellano.github.io/js/contributions.js></script></body></html>
+</code></pre><p>Let&rsquo;s test if our app is working creating some tables.</p><p>Inside Archonweb:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mysql -uarchon -ppassword -hdb archondb
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>MariaDB <span style=color:#f92672>[</span>archondb<span style=color:#f92672>]</span>&gt; CREATE TABLE example <span style=color:#f92672>(</span> id INT, data VARCHAR<span style=color:#f92672>(</span>100<span style=color:#f92672>)</span> <span style=color:#f92672>)</span>;
+</span></span><span style=display:flex><span>MariaDB <span style=color:#f92672>[</span>archondb<span style=color:#f92672>]</span>&gt; CREATE TABLE example <span style=color:#f92672>(</span> id INT, data VARCHAR<span style=color:#f92672>(</span>100<span style=color:#f92672>)</span> <span style=color:#f92672>)</span>;
+</span></span></code></pre></div><p>After creating two tables we will see this in http://SERVER_IP:8080:</p><p><img src=/images/archonwebv3_two_tables.png alt="Two tables"></p><p>This is it so far folks!</p><p>I&rsquo;m learning new things about Docker and I will write about it soon. Stay tuned.</p></article></div></div></div></div></div></div></main></div><script type=application/javascript src=https://a-castellano.github.io/js/toc.js></script><link rel=stylesheet href=https://a-castellano.github.io/css/toc.css></div><div class="footer container-xl width-full p-responsive"><div class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"><a aria-label=Homepage title=GitHub class="footer-octicon d-none d-lg-block mr-lg-4" href=https://a-castellano.github.io/><svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58.0.0 3.58.0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38.0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95.0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12.0.0.67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15.0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48.0 1.07-.01 1.93-.01 2.2.0.21.15.46.55.38A8.013 8.013.0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a><ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0"><li class="mr-3 mr-lg-0">Theme by <a href=https://github.com/MeiK2333/github-style>github-style</a></li><li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href=https://github.com/>GitHub, Inc.</a></li></ul></div><div class="d-flex flex-justify-center pb-6"><span class="f6 text-gray-light"></span></div></div></body><script type=application/javascript src=https://a-castellano.github.io/js/github-style.js></script></html>
